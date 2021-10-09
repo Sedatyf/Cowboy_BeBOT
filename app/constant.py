@@ -23,3 +23,5 @@ HOROSCOPE_LIST = ["Bélier", "Taureau", "Gémeaux", "Cancer", "Lion", "Vierge", 
                   "Capricorne", "Verseau", "Poissons"]
 
 HOROSCOPE_LINK = "https://www.evozen.fr/horoscope/horoscope-du-jour"
+
+GOOD_NIGHT_LIST = ["bonne nuit", "je vais me coucher", "j'vais me coucher"]

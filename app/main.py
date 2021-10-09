@@ -27,8 +27,10 @@ bot = hikari.GatewayBot(token=TOKEN)
 
 @bot.listen()
 async def good_night(event: hikari.GuildMessageCreateEvent) -> None:
-    if "bonne nuit" in event.content.lower() or "je vais me coucher" in event.content.lower() or \
-            "j'vais me coucher" in event.content.lower():
+    if event.is_bot or not event.content:
+        return
+
+    if any(x in event.content.lower() for x in constant.GOOD_NIGHT_LIST):
         emojis = await bot.rest.fetch_guild_emojis(STURDY_ID)
         await event.message.respond(f"Bonne nuit {emojis[3]}")
 
