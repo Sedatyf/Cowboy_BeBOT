@@ -19,6 +19,12 @@ bot = hikari.GatewayBot(token=TOKEN)
 # event: hikari.events.lifetime_events.StartedEvent
 
 
+#############################################
+#
+# Bot will say good night to a user saying good night
+#
+#############################################
+
 @bot.listen()
 async def good_night(event: hikari.GuildMessageCreateEvent) -> None:
     if "bonne nuit" in event.content.lower() or "je vais me coucher" in event.content.lower() or \
@@ -42,6 +48,13 @@ async def your_take_on(event: hikari.GuildMessageCreateEvent) -> None:
     if event.content.startswith("CBB: Ton avis "):
         await event.message.respond(random.choice(constant.TAKE_LIST))
 
+
+#############################################
+#
+# Bot will give its life advice on existential crisis
+# Answer to "CBB: Est-ce que "
+#
+#############################################
 
 @bot.listen()
 async def life_advice(event: hikari.GuildMessageCreateEvent) -> None:
