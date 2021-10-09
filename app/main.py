@@ -33,6 +33,14 @@ async def your_take_on(event: hikari.GuildMessageCreateEvent) -> None:
         await event.message.respond(random.choice(constant.TAKE_LIST))
 
 
+@bot.listen()
+async def life_advice(event: hikari.GuildMessageCreateEvent) -> None:
+    if event.is_bot or not event.content:
+        return
+
+    if event.content.startswith("CBB: Est-ce que "):
+        await event.message.respond(random.choice(constant.ADVICE_LIST))
+
 #############################################
 #
 # A classic Magic 8 Ball
@@ -108,7 +116,7 @@ async def ping(event: hikari.GuildMessageCreateEvent) -> None:
         return
 
     if event.content.startswith("CBB: Ping!"):
-        await event.message.respond("Pong!")
+        await event.message.respond(f"Pong! {bot.heartbeat_latency * 1_000:.0f}ms")
 
 
 bot.run()
