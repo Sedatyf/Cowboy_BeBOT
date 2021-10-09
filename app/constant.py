@@ -9,6 +9,8 @@ MAGIC_BALL_LIST = ["Essaye plus tard", "Essaye encore", "Pas d'avis", "C'est ton
 HELP_MESSAGE = "Les commandes disponibles actuellement sont : \n" \
                "- **CBB: Ton avis** où je donne mon avis sur les questions que vous me posez \n" \
                "- **CBB 8ball:** où je dis votre avenir à la manière d'une Magic 8 Ball \n" \
+               "- **CBB horoscope:** il vous suffit de taper n'importe quelle phrase contenant le signe astrologique " \
+               "et je vous donne votre horoscope" \
                "- **CBB: Ping!** où je réponds Pong! \n" \
                "Respectez bien l'écriture des commandes comme affichées en gras !"
 
@@ -16,4 +18,3 @@ HOROSCOPE_LIST = ["Bélier", "Taureau", "Gémeaux", "Cancer", "Lion", "Vierge", 
                   "Capricorne", "Verseau", "Poissons"]
 
 HOROSCOPE_LINK = "https://www.evozen.fr/horoscope/horoscope-du-jour"
-
