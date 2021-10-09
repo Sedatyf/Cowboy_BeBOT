@@ -60,6 +60,11 @@ async def horoscope(event: hikari.GuildMessageCreateEvent) -> None:
 
     if event.content.startswith("CBB horoscope: "):
         sign = utils.find_match(event.content.title())
+
+        if not sign:
+            await event.message.respond("Désolé, je n'ai pas compris le signe astrologique que vous vouliez :grimacing:")
+            return
+
         love_life = horoscope_api.get_love_life(sign)
         work_life = horoscope_api.get_work_life(sign)
         finances = horoscope_api.get_finances(sign)
@@ -81,7 +86,8 @@ async def bot_help(event: hikari.GuildMessageCreateEvent) -> None:
     if event.is_bot or not event.content:
         return
 
-    if event.content.startswith("CBB: Je suis confus") or event.content.startswith("CBB: À l'aide") or event.content.startswith("CBB: A l'aide"):
+    if event.content.startswith("CBB: Je suis confus") or event.content.startswith(
+            "CBB: À l'aide") or event.content.startswith("CBB: A l'aide"):
         await event.message.respond(constant.HELP_MESSAGE)
 
 
