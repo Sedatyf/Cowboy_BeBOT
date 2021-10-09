@@ -11,3 +11,9 @@ HELP_MESSAGE = "Les commandes disponibles actuellement sont : \n" \
                "- **CBB 8ball:** où je dis votre avenir à la manière d'une Magic 8 Ball \n" \
                "- **CBB: Ping!** où je réponds Pong! \n" \
                "Respectez bien l'écriture des commandes comme affichées en gras !"
+
+HOROSCOPE_LIST = ["Bélier", "Taureau", "Gémeaux", "Cancer", "Lion", "Vierge", "Balance", "Scorpion", "Sagittaire",
+                  "Capricorne", "Verseau", "Poissons"]
+
+HOROSCOPE_LINK = "https://www.evozen.fr/horoscope/horoscope-du-jour"
+
