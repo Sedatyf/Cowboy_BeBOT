@@ -20,6 +20,7 @@ bot = hikari.GatewayBot(token=TOKEN)
 #############################################
 #
 # Bot will give its opinion on question
+# Answer to "CBB: Ton avis "
 #
 #############################################
 
@@ -35,6 +36,7 @@ async def your_take_on(event: hikari.GuildMessageCreateEvent) -> None:
 #############################################
 #
 # A classic Magic 8 Ball
+# Answer to "CBB 8ball: "
 #
 #############################################
 
@@ -50,6 +52,7 @@ async def magic_8_ball(event: hikari.GuildMessageCreateEvent) -> None:
 #############################################
 #
 # Tells your daily horoscope
+# Answer to "CBB horoscope: "
 #
 #############################################
 
@@ -78,6 +81,7 @@ async def horoscope(event: hikari.GuildMessageCreateEvent) -> None:
 #############################################
 #
 # Help message that shows available command
+# Answer to "CBB: Je suis confus" and "CBB: À l'aide" and "CBB: A l'aide"
 #
 #############################################
 
@@ -94,6 +98,7 @@ async def bot_help(event: hikari.GuildMessageCreateEvent) -> None:
 #############################################
 #
 # Debug method ping pong
+# Answer to "CBB: Ping!"
 #
 #############################################
 
