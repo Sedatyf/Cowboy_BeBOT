@@ -6,5 +6,8 @@ MAGIC_BALL_LIST = ["Essaye plus tard", "Essaye encore", "Pas d'avis", "C'est ton
                    "Très probable", "Oui", "C'est bien parti",
                    "C'est non", "Peu probable", "Faut pas rêver", "N'y compte pas", "Impossible"]
 
-HELP_MESSAGE = "Les commandes disponibles actuellement sont **CBB: Ton avis** et **CBB 8ball**. \n" \
-               "Respectez bien l'écriture des commandes !"
+HELP_MESSAGE = "Les commandes disponibles actuellement sont : \n" \
+               "- **CBB: Ton avis** où je donne mon avis sur les questions que vous me posez \n" \
+               "- **CBB 8ball:** où je dis votre avenir à la manière d'une Magic 8 Ball \n" \
+               "- **CBB: Ping!** où je réponds Pong! \n" \
+               "Respectez bien l'écriture des commandes comme affichées en gras !"

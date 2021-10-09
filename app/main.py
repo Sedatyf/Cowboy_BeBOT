@@ -17,7 +17,7 @@ bot = hikari.GatewayBot(token=TOKEN)
 
 #############################################
 #
-# Bot will give his opinion on question
+# Bot will give its opinion on question
 #
 #############################################
 
@@ -45,6 +45,12 @@ async def magic_8_ball(event: hikari.GuildMessageCreateEvent) -> None:
         await event.message.respond(":8ball:  " + random.choice(Constant.MAGIC_BALL_LIST) + "  :8ball:")
 
 
+#############################################
+#
+# Help message that shows available command
+#
+#############################################
+
 @bot.listen()
 async def bot_help(event: hikari.GuildMessageCreateEvent) -> None:
     if event.is_bot or not event.content:
@@ -65,7 +71,7 @@ async def ping(event: hikari.GuildMessageCreateEvent) -> None:
     if event.is_bot or not event.content:
         return
 
-    if event.content.startswith("hk.ping"):
+    if event.content.startswith("CBB: Ping!"):
         await event.message.respond("Pong!")
 
 
