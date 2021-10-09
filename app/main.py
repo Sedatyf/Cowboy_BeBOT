@@ -14,7 +14,17 @@ import horoscope_api
 #############################################
 
 TOKEN = config('BOT_TOKEN', default='')
+STURDY_ID = config('STURDY_ID', default='')
 bot = hikari.GatewayBot(token=TOKEN)
+# event: hikari.events.lifetime_events.StartedEvent
+
+
+@bot.listen()
+async def good_night(event: hikari.GuildMessageCreateEvent) -> None:
+    if "bonne nuit" in event.content.lower() or "je vais me coucher" in event.content.lower() or \
+            "j'vais me coucher" in event.content.lower():
+        emojis = await bot.rest.fetch_guild_emojis(STURDY_ID)
+        await event.message.respond(f"Bonne nuit {emojis[3]}")
 
 
 #############################################
@@ -40,6 +50,7 @@ async def life_advice(event: hikari.GuildMessageCreateEvent) -> None:
 
     if event.content.startswith("CBB: Est-ce que "):
         await event.message.respond(random.choice(constant.ADVICE_LIST))
+
 
 #############################################
 #
