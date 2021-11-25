@@ -24,9 +24,9 @@ client.on('messageCreate', async message => {
     if (message.author.id === '896039839076585472') return; // bot id so he doesn't answer itself
     const userMessage = message.cleanContent.toLowerCase();
     if (
-        userMessage === 'bonne nuit' ||
-        userMessage === 'je vais me coucher' ||
-        userMessage === "j'vais me coucher"
+        userMessage.includes('bonne nuit') ||
+        userMessage.includes('je vais me coucher') ||
+        userMessage.includes("j'vais me coucher")
     ) {
         const heyGuys = client.emojis.cache.find(emoji => emoji.name === 'HeyGuys');
         message.reply(`Bonne nuit ${heyGuys}`);
