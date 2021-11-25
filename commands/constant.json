@@ -19,5 +19,14 @@
         "Peu probable",
         "Faut pas rêver",
         "N'y compte pas",
-        "Impossible"]
+        "Impossible"],
+    "Opinion": [
+        "Wallah c'est trop bien", 
+        "J'adore", 
+        "J'approuve", 
+        "C'est plutôt bien",
+        "Je déteste", 
+        "Je désapprouve", 
+        "C'est éclaté", 
+        "C'est claqué au sol"]
 }

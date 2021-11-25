@@ -1,17 +1,16 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const obj = require('./constant.json');
+const constant = require('./constant.json');
+const utils = require('../utils.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('magicball')
         .setDescription("Répond aux questions existentielles à la manière d'une Magic 8 ball")
         .addStringOption(option =>
-            option.setName('sentence').setDescription('La phrase a posé au bot').setRequired(true)
+            option.setName('question').setDescription('La phrase a posé au bot').setRequired(true)
         ),
     async execute(interaction) {
-        let rand = Math.random();
-        rand *= obj.Magic8Ball.length;
-        rand = Math.floor(rand);
-        await interaction.reply(`:8ball: ${obj.Magic8Ball[rand]} :8ball:`);
+        const rand = utils.generateRandomForArray(constant.Magic8Ball);
+        await interaction.reply(`:8ball: ${constant.Magic8Ball[rand]} :8ball:`);
     },
 };
