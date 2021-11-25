@@ -1,4 +1,0 @@
-requests==2.26.0
-hikari==2.0.0.dev103
-lxml==4.6.3
-python-decouple==3.5
