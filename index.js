@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { Client, Collection, Intents, Guild } = require('discord.js');
-require('discord-reply');
 require('dotenv').config();
 const TOKEN = process.env.BOT_TOKEN;
 
@@ -51,6 +50,10 @@ client.on('messageCreate', async message => {
             content: `${lul}`,
             allowedMentions: { repliedUser: false },
         });
+    }
+    if (userMessage.includes('mdr') || userMessage.includes('lol')) {
+        const lul = client.emojis.cache.find(emoji => emoji.name === 'lul');
+        message.react(lul);
     }
 });
 
