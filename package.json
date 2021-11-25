@@ -1,0 +1,17 @@
+{
+  "name": "cowboybebot_js",
+  "version": "1.0.0",
+  "description": "La version JS de CowboyBeBOT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sedatyf",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0"
+  }
+}
