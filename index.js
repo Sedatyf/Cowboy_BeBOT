@@ -1,8 +1,16 @@
-const { Client, Intents } = require('discord.js');
+const fs = require('fs');
+const { Client, Collection, Intents } = require('discord.js');
 require('dotenv').config();
 const TOKEN = process.env.BOT_TOKEN;
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+}
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -11,24 +19,17 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
 
-    const { commandName } = interaction;
+    const command = client.commands.get(interaction.commandName);
+    if (!command) return;
 
-    switch (commandName) {
-        case 'ping':
-            await interaction.reply('Pong!');
-            break;
-        case 'server':
-            await interaction.reply(
-                `**Server name:** ${interaction.guild.name}\n**Created at:** ${interaction.guild.createdAt}\n**Total members:** ${interaction.guild.memberCount}`
-            );
-            break;
-        case 'user':
-            await interaction.reply(
-                `**Your tag:** ${interaction.user.tag}\n**Your id:** ${interaction.user.id}\n**Created at:** ${interaction.user.createdAt}`
-            );
-            break;
-        default:
-            break;
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({
+            content: "Une erreur c'est produite lors de l'exécution de la commande !",
+            ephemeral: true,
+        });
     }
 });
 
