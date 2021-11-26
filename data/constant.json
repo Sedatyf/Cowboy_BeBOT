@@ -1,5 +1,5 @@
 {
-    "Magic8Ball": [
+    "magic8Ball": [
         "Essaye plus tard",
         "Essaye encore",
         "Pas d'avis",
@@ -19,14 +19,18 @@
         "Peu probable",
         "Faut pas rêver",
         "N'y compte pas",
-        "Impossible"],
-    "Opinion": [
-        "Wallah c'est trop bien", 
-        "J'adore", 
-        "J'approuve", 
+        "Impossible"
+    ],
+    "opinion": [
+        "Wallah c'est trop bien",
+        "J'adore",
+        "J'approuve",
         "C'est plutôt bien",
-        "Je déteste", 
-        "Je désapprouve", 
-        "C'est éclaté", 
-        "C'est claqué au sol"]
+        "Je déteste",
+        "Je désapprouve",
+        "C'est éclaté",
+        "C'est claqué au sol"
+    ],
+    "epicGameLink": "https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=FR&allowCountries=FR",
+    "freeGameMessage": "Bonjour à tous :rat:\nCette semaine les jeux gratuits sont les suivants :"
 }
