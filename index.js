@@ -5,9 +5,11 @@ const TOKEN = process.env.BOT_TOKEN;
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 client.commands = new Collection();
+const onMessageFunctions = {};
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const onMessageFiles = fs.readdirSync('./onMessage').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -20,28 +22,16 @@ for (const file of eventFiles) {
     else client.on(event.name, (...args) => event.execute(...args));
 }
 
+for (const file of onMessageFiles) {
+    const onMessage = require(`./onMessage/${file}`);
+    onMessageFunctions[file.toString().replace('.js', '')] = onMessage;
+}
+
 client.on('messageCreate', async message => {
     if (message.author.id === '896039839076585472') return; // bot id so he doesn't answer itself
-    const userMessage = message.cleanContent.toLowerCase();
-    if (
-        userMessage.includes('bonne nuit') ||
-        userMessage.includes('je vais me coucher') ||
-        userMessage.includes("j'vais me coucher")
-    ) {
-        const heyGuys = client.emojis.cache.find(emoji => emoji.name === 'HeyGuys');
-        message.reply(`Bonne nuit ${heyGuys}`);
-    }
-    if (userMessage.includes('<:lul:375955064931745792>')) {
-        const lul = client.emojis.cache.find(emoji => emoji.name === 'lul');
-        message.reply({
-            content: `${lul}`,
-            allowedMentions: { repliedUser: false },
-        });
-    }
-    if (userMessage.includes('mdr') || userMessage.includes('lol')) {
-        const lul = client.emojis.cache.find(emoji => emoji.name === 'lul');
-        message.react(lul);
-    }
+    onMessageFunctions.goodNight.goodNight(client, message);
+    onMessageFunctions.replyLul.replyLul(client, message);
+    onMessageFunctions.reactLul.reactLul(client, message);
 });
 
 client.login(TOKEN);
