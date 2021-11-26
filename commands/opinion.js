@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const constant = require('../utils/constant.json');
-const utils = require('../utils/utils.js');
+const constant = require('../data/constant.json');
+const utils = require('../tools/utils.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,6 +11,6 @@ module.exports = {
         ),
     async execute(interaction) {
         rand = utils.generateRandomForArray(constant.Opinion);
-        await interaction.reply(`${constant.Opinion[rand]}`);
+        await interaction.reply(`${constant.opinion[rand]}`);
     },
 };
