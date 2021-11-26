@@ -12,3 +12,6 @@ jspm_packages/
 .env
 .env.test
 .env.production
+
+# Project's data
+epicOutput.json
