@@ -10,7 +10,7 @@ module.exports = {
             option.setName('question').setDescription('La phrase a posé au bot').setRequired(true)
         ),
     async execute(interaction) {
-        rand = utils.generateRandomForArray(constant.Opinion);
+        rand = utils.generateRandomForArray(constant.opinion);
         await interaction.reply(`${constant.opinion[rand]}`);
     },
 };
