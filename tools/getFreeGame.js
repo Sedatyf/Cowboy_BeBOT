@@ -3,11 +3,15 @@ const constants = require('../data/constant.json');
 const got = require('got');
 const url = constants.epicGameLink;
 const epicJson = require('../data/epicOutput.json');
-const channelIDs = require('../data/channelIDs.json');
+const channelIDs = require('../data/discordIDs.json').channels;
+const roleIDs = require('../data/discordIDs.json').roles;
 
 function getFreeGame(client) {
     getEpicData();
     const epicGames = epicJson.data.Catalog.searchStore.elements;
+    client.channels.cache
+        .get(channelIDs.informations)
+        .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
     client.channels.cache.get(channelIDs.informations).send(constants.freeGameMessage);
     for (const element of epicGames) {
         if (element.price.totalPrice.discountPrice === 0 && element.promotions !== null) {
