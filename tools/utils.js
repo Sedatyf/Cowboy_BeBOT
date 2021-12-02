@@ -10,6 +10,14 @@ function generateRandomForArray(arr) {
     return Math.floor(rand);
 }
 
+function generateTodayDate() {
+    const date = new Date();
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+}
+
 /**
  * Check if user is subscribed to Epic notification
  * @param {*} interaction
@@ -52,4 +60,4 @@ function epicConstructJSON(interaction, jsonPathToRead, jsonPathToWrite, toSubsc
     });
 }
 
-module.exports = { generateRandomForArray, isSubscribed, epicConstructJSON };
+module.exports = { generateRandomForArray, isSubscribed, epicConstructJSON, generateTodayDate };
