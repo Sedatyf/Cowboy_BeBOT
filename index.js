@@ -36,7 +36,7 @@ for (const file of onMessageFiles) {
 client.on('messageCreate', async message => {
     if (message.author.id === '896039839076585472') return; // bot id so he doesn't answer itself
     onMessageFunctions.goodNight.goodNight(client, message);
-    onMessageFunctions.replyLul.replyLul(client, message);
+    //onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
     onMessageFunctions.reactLul.reactLul(client, message);
 });
 
