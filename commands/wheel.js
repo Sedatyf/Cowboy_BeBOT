@@ -5,7 +5,9 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('wheel')
-        .setDescription('WIP')
+        .setDescription(
+            "Permet de choisir entre plusieurs éléments donnés. Séparer les éléments d'un espace"
+        )
         .addStringOption(option =>
             option
                 .setName('elements')
