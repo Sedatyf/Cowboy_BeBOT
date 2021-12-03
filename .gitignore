@@ -13,6 +13,9 @@ jspm_packages/
 .env.test
 .env.production
 
+# Sandbox file so I can fiddle around
+sandbox.js
+
 # Project's data
 epicOutput.json
 subscribedUser.json
