@@ -10,6 +10,12 @@ function generateRandomForArray(arr) {
     return Math.floor(rand);
 }
 
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; // max & min both included
+}
+
 function generateTodayDate() {
     const date = new Date();
     const day = ('0' + date.getDate()).slice(-2);
@@ -60,4 +66,10 @@ function epicConstructJSON(interaction, jsonPathToRead, jsonPathToWrite, toSubsc
     });
 }
 
-module.exports = { generateRandomForArray, isSubscribed, epicConstructJSON, generateTodayDate };
+module.exports = {
+    generateRandomForArray,
+    getRandomIntInclusive,
+    isSubscribed,
+    epicConstructJSON,
+    generateTodayDate,
+};
