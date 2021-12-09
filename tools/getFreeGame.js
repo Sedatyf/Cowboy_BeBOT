@@ -5,6 +5,7 @@ const url = constants.epicGameLink;
 const channelIDs = require('../data/discordIDs.json').channels;
 const roleIDs = require('../data/discordIDs.json').roles;
 const utils = require('../tools/utils.js');
+const dataFullPath = process.cwd() + '/data/epicOutput.json';
 
 /**
  * Get the current free games, send those games to a channel, ping people with a role
@@ -13,7 +14,7 @@ const utils = require('../tools/utils.js');
  */
 function getFreeGame(client) {
     getEpicData(url);
-    const epicJson = require('../data/epicOutput.json');
+    let epicJson = JSON.parse(fs.readFileSync(dataFullPath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
         .get(channelIDs.informations)
@@ -29,7 +30,7 @@ function getFreeGame(client) {
  */
 function reminderFreeGame(client) {
     getEpicData(url);
-    const epicJson = require('../data/epicOutput.json');
+    let epicJson = JSON.parse(fs.readFileSync(dataFullPath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
         .get(channelIDs.informations)
