@@ -18,7 +18,7 @@ module.exports = {
         ),
     async execute(interaction) {
         const originalString = interaction.options.data[0].value;
-        const choicesArray = originalString.split(' ');
+        const choicesArray = originalString.split(' / ');
         rand = utils.generateRandomForArray(choicesArray);
         await interaction.reply('Je fais tourner la roue');
         await interaction.channel.send(
