@@ -6,7 +6,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('wheel')
         .setDescription(
-            "Permet de choisir entre plusieurs éléments donnés. Séparer les éléments d'un espace"
+            "Permet de choisir entre plusieurs éléments donnés. Séparer les éléments d'un slash"
         )
         .addStringOption(option =>
             option
