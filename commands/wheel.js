@@ -12,7 +12,7 @@ module.exports = {
             option
                 .setName('elements')
                 .setDescription(
-                    "Les éléments à mettre dans la roue. Séparer les éléments d'un espace"
+                    "Les éléments à mettre dans la roue. Séparer les éléments d'un slash"
                 )
                 .setRequired(true)
         ),
