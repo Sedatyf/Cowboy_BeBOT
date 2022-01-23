@@ -66,10 +66,17 @@ function epicConstructJSON(interaction, jsonPathToRead, jsonPathToWrite, toSubsc
     });
 }
 
+function writeFile(filepath, data) {
+    fs.writeFile(filepath, data, err => {
+        if (err) throw err;
+    });
+}
+
 module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
     isSubscribed,
     epicConstructJSON,
     generateTodayDate,
+    writeFile,
 };

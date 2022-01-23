@@ -2,7 +2,12 @@
 const fs = require('fs');
 const { Client, Collection, Intents, Guild } = require('discord.js');
 const schedule = require('node-schedule');
+
 const getFreeGame = require('./tools/getFreeGame.js');
+const getEpicData = require('./tools/getEpicData.js');
+const constants = require('./data/constant.json');
+const epicOutputFullpath = process.cwd() + '/data/epicOutput.json';
+
 require('dotenv').config();
 const TOKEN = process.env.BOT_TOKEN;
 
@@ -42,11 +47,13 @@ client.on('messageCreate', async message => {
 
 // cron job for free game on Epic
 const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
-    getFreeGame.getFreeGame(client);
+    getEpicData.getEpicData(constants.epicGameLink);
+    getFreeGame.getFreeGame(client, epicOutputFullpath);
 });
 
 const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
-    getFreeGame.reminderFreeGame(client);
+    getEpicData.getEpicData(constants.epicGameLink);
+    getFreeGame.reminderFreeGame(client, epicOutputFullpath);
 });
 
 client.login(TOKEN);

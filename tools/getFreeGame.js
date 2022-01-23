@@ -1,20 +1,17 @@
 const fs = require('fs');
 const constants = require('../data/constant.json');
-const got = require('got');
-const url = constants.epicGameLink;
 const channelIDs = require('../data/discordIDs.json').channels;
 const roleIDs = require('../data/discordIDs.json').roles;
 const utils = require('../tools/utils.js');
-const dataFullPath = process.cwd() + '/data/epicOutput.json';
 
 /**
  * Get the current free games, send those games to a channel, ping people with a role
  * with a fresh message
  * @param {Client} client
+ * @param {string} fullpath of the extracted epic data
  */
-function getFreeGame(client) {
-    getEpicData(url);
-    let epicJson = JSON.parse(fs.readFileSync(dataFullPath, 'utf8'));
+function getFreeGame(client, epicOutputFullpath) {
+    let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
         .get(channelIDs.informations)
@@ -27,29 +24,16 @@ function getFreeGame(client) {
  * Get the current free games, send those games to a channel, ping people with a role
  * with a reminder message
  * @param {Client} client
+ * @param {string} fullpath of the extracted epic data
  */
-function reminderFreeGame(client) {
-    getEpicData(url);
-    let epicJson = JSON.parse(fs.readFileSync(dataFullPath, 'utf8'));
+function reminderFreeGame(client, epicOutputFullpath) {
+    let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
-        .get(channelIDs.informations)
+        .get(channelIDs.testing)
         .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
-    client.channels.cache.get(channelIDs.informations).send(constants.freeGameReminder);
+    client.channels.cache.get(channelIDs.testing).send(constants.freeGameReminder);
     getGamesFromData(client, epicGames);
-}
-
-/**
- * Download the response's body from the given URL and then write it in a JSON
- * @param {string} url This URL must lead to the JSON request from EpicGame Store
- */
-function getEpicData(url) {
-    got(url).then(response => {
-        const data = response.body;
-        fs.writeFile('./data/epicOutput.json', data, err => {
-            if (err) throw err;
-        });
-    });
 }
 
 /**
