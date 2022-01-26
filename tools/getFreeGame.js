@@ -30,9 +30,9 @@ function reminderFreeGame(client, epicOutputFullpath) {
     let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
-        .get(channelIDs.testing)
+        .get(channelIDs.informations)
         .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
-    client.channels.cache.get(channelIDs.testing).send(constants.freeGameReminder);
+    client.channels.cache.get(channelIDs.informations).send(constants.freeGameReminder);
     getGamesFromData(client, epicGames);
 }
 
