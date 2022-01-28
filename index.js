@@ -48,7 +48,9 @@ client.on('messageCreate', async message => {
 // cron job for free game on Epic
 const jobEpic = schedule.scheduleJob('* * * * *', function() {
     getEpicData.getEpicData(constants.epicGameLink);
-    getFreeGame.getFreeGame(client, epicOutputFullpath);
+    setTimeout(() => {
+        getFreeGame.getFreeGame(client, epicOutputFullpath);
+    }, 5000);
 });
 
 const jobReminder = schedule.scheduleJob('00 18 * * 3', function() {
