@@ -6,7 +6,7 @@ const utils = require('./utils');
  * @param {string} url This URL must lead to the JSON request from EpicGame Store
  */
 function getEpicData(url) {
-    let options = { json: true };
+    const options = { json: true };
     request(url, options, (error, res, body) => {
         if (error) {
             return console.log(error);

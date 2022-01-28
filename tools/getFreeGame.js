@@ -11,7 +11,7 @@ const utils = require('../tools/utils.js');
  * @param {string} fullpath of the extracted epic data
  */
 function getFreeGame(client, epicOutputFullpath) {
-    let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
+    const epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
         .get(channelIDs.testing)
@@ -27,7 +27,7 @@ function getFreeGame(client, epicOutputFullpath) {
  * @param {string} fullpath of the extracted epic data
  */
 function reminderFreeGame(client, epicOutputFullpath) {
-    let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
+    const epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
         .get(channelIDs.testing)
@@ -45,14 +45,15 @@ function getGamesFromData(client, gamesData) {
     for (const element of gamesData) {
         if (element.price.totalPrice.discountPrice === 0 && element.promotions !== null) {
             try {
-                let epicStartDate =
+                const epicStartDate =
                     element.promotions.promotionalOffers[0].promotionalOffers[0].startDate;
-                let epicEndDate =
+                const epicEndDate =
                     element.promotions.promotionalOffers[0].promotionalOffers[0].endDate;
-                let startDate = new Date(epicStartDate.slice(0, 10));
-                let endDate = new Date(epicEndDate.slice(0, 10));
+                const startDate = new Date(epicStartDate.slice(0, 10));
+                const endDate = new Date(epicEndDate.slice(0, 10));
                 if (todayDate < startDate || todayDate > endDate) continue;
-            } catch (error) {
+            }
+            catch (error) {
                 continue;
             }
             client.channels.cache.get(channelIDs.testing).send(`**${element.title}**`);

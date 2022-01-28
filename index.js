@@ -41,17 +41,17 @@ for (const file of onMessageFiles) {
 client.on('messageCreate', async message => {
     if (message.author.id === '896039839076585472') return; // bot id so he doesn't answer itself
     onMessageFunctions.goodNight.goodNight(client, message);
-    //onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
+    // onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
     onMessageFunctions.reactLul.reactLul(client, message);
 });
 
 // cron job for free game on Epic
-const jobEpic = schedule.scheduleJob('* * * * *', function () {
+const jobEpic = schedule.scheduleJob('* * * * *', function() {
     getEpicData.getEpicData(constants.epicGameLink);
     getFreeGame.getFreeGame(client, epicOutputFullpath);
 });
 
-const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
+const jobReminder = schedule.scheduleJob('00 18 * * 3', function() {
     getEpicData.getEpicData(constants.epicGameLink);
     getFreeGame.reminderFreeGame(client, epicOutputFullpath);
 });
