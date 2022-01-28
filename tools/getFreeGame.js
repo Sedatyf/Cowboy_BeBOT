@@ -14,9 +14,9 @@ function getFreeGame(client, epicOutputFullpath) {
     let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
-        .get(channelIDs.informations)
+        .get(channelIDs.testing)
         .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
-    client.channels.cache.get(channelIDs.informations).send(constants.freeGameMessage);
+    client.channels.cache.get(channelIDs.testing).send(constants.freeGameMessage);
     getGamesFromData(client, epicGames);
 }
 
@@ -30,9 +30,9 @@ function reminderFreeGame(client, epicOutputFullpath) {
     let epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
     client.channels.cache
-        .get(channelIDs.informations)
+        .get(channelIDs.testing)
         .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
-    client.channels.cache.get(channelIDs.informations).send(constants.freeGameReminder);
+    client.channels.cache.get(channelIDs.testing).send(constants.freeGameReminder);
     getGamesFromData(client, epicGames);
 }
 
@@ -55,9 +55,9 @@ function getGamesFromData(client, gamesData) {
             } catch (error) {
                 continue;
             }
-            client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
+            client.channels.cache.get(channelIDs.testing).send(`**${element.title}**`);
             client.channels.cache
-                .get(channelIDs.informations)
+                .get(channelIDs.testing)
                 .send(`https://www.epicgames.com/store/fr/p/${element.productSlug}?lang=fr`);
         }
     }
