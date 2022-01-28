@@ -53,9 +53,11 @@ const jobEpic = schedule.scheduleJob('10 17 * * 4', function() {
     }, 5000);
 });
 
-const jobReminder = schedule.scheduleJob('00 18 * * 3', function() {
+const jobReminder = schedule.scheduleJob('* * * * *', function() {
     getEpicData.getEpicData(constants.epicGameLink);
-    getFreeGame.reminderFreeGame(client, epicOutputFullpath);
+    setTimeout(() => {
+        getFreeGame.reminderFreeGame(client, epicOutputFullpath);
+    }, 5000);
 });
 
 client.login(TOKEN);
