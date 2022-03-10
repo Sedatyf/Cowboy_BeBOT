@@ -52,8 +52,7 @@ function getGamesFromData(client, gamesData) {
                 const startDate = new Date(epicStartDate.slice(0, 10));
                 const endDate = new Date(epicEndDate.slice(0, 10));
                 if (todayDate < startDate || todayDate > endDate) continue;
-            }
-            catch (error) {
+            } catch (error) {
                 continue;
             }
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
