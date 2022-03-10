@@ -43,17 +43,18 @@ client.on('messageCreate', async message => {
     onMessageFunctions.goodNight.goodNight(client, message);
     // onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
     onMessageFunctions.reactLul.reactLul(client, message);
+    onMessageFunctions.saveSutomScore.saveSutomScore(client, message);
 });
 
 // cron job for free game on Epic
-const jobEpic = schedule.scheduleJob('10 17 * * 4', function() {
+const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
     getEpicData.getEpicData(constants.epicGameLink);
     setTimeout(() => {
         getFreeGame.getFreeGame(client, epicOutputFullpath);
     }, 5000);
 });
 
-const jobReminder = schedule.scheduleJob('00 18 * * 3', function() {
+const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
     getEpicData.getEpicData(constants.epicGameLink);
     setTimeout(() => {
         getFreeGame.reminderFreeGame(client, epicOutputFullpath);

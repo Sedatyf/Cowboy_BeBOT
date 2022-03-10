@@ -1,3 +1,4 @@
+const { Message } = require('discord.js');
 const fs = require('fs');
 
 /**
@@ -45,9 +46,43 @@ function writeFile(filepath, data) {
     });
 }
 
+/**
+ * Save a sutom score for a specific user
+ * @param {string} jsonPath json's filepath
+ * @param {Message} message client's message
+ * @param {Number} sutomNumber the daily sutom number
+ * @param {Number} score user score
+ */
+function sutomBuildJson(jsonPath, message, sutomNumber, score) {
+    const jsonData = require(`../${jsonPath}`);
+    if (!(message.author.username in jsonData['users'])) {
+        jsonData['users'][message.author.username] = {
+            userInfo: message.author.id,
+            sutomScore: {},
+        };
+
+        const createUserJson = JSON.stringify(jsonData);
+        fs.writeFile(jsonPath, createUserJson, 'utf8', function (err) {
+            if (err) throw err;
+        });
+    }
+
+    if (typeof score !== 'number' || score < 1) {
+        message.reply("T'essayes de m'arnaquer ? è_é");
+        return;
+    }
+
+    jsonData['users'][message.author.username]['sutomScore'][sutomNumber] = score;
+    const json = JSON.stringify(jsonData);
+    fs.writeFile(jsonPath, json, 'utf8', function (err) {
+        if (err) throw err;
+    });
+}
+
 module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
     generateTodayDate,
     writeFile,
+    sutomBuildJson,
 };
