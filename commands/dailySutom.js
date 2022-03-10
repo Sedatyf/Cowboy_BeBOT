@@ -11,18 +11,24 @@ module.exports = {
         .setDescription('Affiche les scores enregistrés du Sutom du jour'),
     async execute(interaction) {
         const currentSutom = utils.getCurrentSutom(SUTOM_JSON_PATH).toString();
-        await interaction.reply(
-            "Voici les scores que j'ai enregistré pour le Sutom du jour par ordre d'arrivée"
-        );
+
         let message = '';
-        for (const [key, value] of Object.entries(sutomJson.users)) {
-            message += `${key} : `;
-            for (const [key1, value1] of Object.entries(value['sutomScore'])) {
-                if (key1 === currentSutom) {
-                    message += value1 + '\n';
+        for (const [user, value] of Object.entries(sutomJson.users)) {
+            if (!(currentSutom in value)) continue;
+            message += `${user} : `;
+            for (const [score, scoreValue] of Object.entries(value['sutomScore'])) {
+                if (score === currentSutom) {
+                    message += scoreValue + '\n';
                 }
             }
         }
-        await interaction.channel.send(message);
+        if (message === '') {
+            await interaction.reply("Je n'ai enregistré aucun score pour aujourd'hui");
+        } else {
+            await interaction.reply(
+                "Voici les scores que j'ai enregistré pour le Sutom du jour par ordre d'arrivée"
+            );
+            await interaction.channel.send(message);
+        }
     },
 };
