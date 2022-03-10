@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const path = require('path');
 const utils = require('../tools/utils.js');
-const sutomJson = require('../data/sutomScore.json');
 
 const SUTOM_JSON_PATH = path.join(__dirname, '..', 'data', 'sutomScore.json');
 
@@ -10,11 +9,12 @@ module.exports = {
         .setName('dailysutom')
         .setDescription('Affiche les scores enregistrés du Sutom du jour'),
     async execute(interaction) {
+        const sutomJson = require('../data/sutomScore.json');
         const currentSutom = utils.getCurrentSutom(SUTOM_JSON_PATH).toString();
 
         let message = '';
         for (const [user, value] of Object.entries(sutomJson.users)) {
-            if (!(currentSutom in value)) continue;
+            if (!(currentSutom in value.sutomScore)) continue;
             message += `${user} : `;
             for (const [score, scoreValue] of Object.entries(value['sutomScore'])) {
                 if (score === currentSutom) {
