@@ -2,7 +2,7 @@ const fs = require('fs');
 
 /**
  * @param  {Array} arr
- * @returns A random number based on the Array's length
+ * @returns {Number} A random number based on the Array's length
  */
 function generateRandomForArray(arr) {
     let rand = Math.random();
@@ -10,12 +10,22 @@ function generateRandomForArray(arr) {
     return Math.floor(rand);
 }
 
+/**
+ * Get a random number with both min and max included
+ * @param {Number} min the minimum value
+ * @param {Number} max the maximum value
+ * @returns {Number} A random Number
+ */
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; // max & min both included
 }
 
+/**
+ * Get the date for the actual day (yyyy-mm-dd)
+ * @returns {string} Retuns a string with today date
+ */
 function generateTodayDate() {
     const date = new Date();
     const day = ('0' + date.getDate()).slice(-2);
@@ -25,30 +35,10 @@ function generateTodayDate() {
 }
 
 /**
- * Construct the JSON variable to write in file in jsonPathToRead
- * @param {*} interaction
- * @param {string} jsonPathToRead
- * @param {string} jsonPathToWrite
- * @param {boolean} toSubscribe Is user wants to subscribe (true) or unsubscribe (false)
+ * Write data in file with fs
+ * @param {string} filepath
+ * @param {string} data
  */
-function epicConstructJSON(interaction, jsonPathToRead, jsonPathToWrite, toSubscribe) {
-    const jsonData = require(jsonPathToRead);
-    jsonData[interaction.user.username] = {
-        isSubscribed: toSubscribe,
-        userInfo: interaction.user.id,
-    };
-
-    const json = JSON.stringify(jsonData);
-    fs.writeFile(jsonPathToWrite, json, 'utf8', function (err) {
-        if (err) throw err;
-        console.log(
-            `${toSubscribe ? 'Registration' : 'Deletion'} to Epic notifications for ${
-                interaction.user.username
-            } is complete`
-        );
-    });
-}
-
 function writeFile(filepath, data) {
     fs.writeFile(filepath, data, err => {
         if (err) throw err;
@@ -58,7 +48,6 @@ function writeFile(filepath, data) {
 module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
-    epicConstructJSON,
     generateTodayDate,
     writeFile,
 };

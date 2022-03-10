@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 /**
  * Check if user is subscribed to Epic notification
  * @param {*} interaction
@@ -13,4 +15,29 @@ function isSubscribed(interaction, jsonPathToRead) {
         }
     }
     return isFound;
+}
+
+/**
+ * Construct the JSON variable to write in file in jsonPathToRead
+ * @param {*} interaction
+ * @param {string} jsonPathToRead
+ * @param {string} jsonPathToWrite
+ * @param {boolean} toSubscribe Is user wants to subscribe (true) or unsubscribe (false)
+ */
+function epicConstructJSON(interaction, jsonPathToRead, jsonPathToWrite, toSubscribe) {
+    const jsonData = require(jsonPathToRead);
+    jsonData[interaction.user.username] = {
+        isSubscribed: toSubscribe,
+        userInfo: interaction.user.id,
+    };
+
+    const json = JSON.stringify(jsonData);
+    fs.writeFile(jsonPathToWrite, json, 'utf8', function (err) {
+        if (err) throw err;
+        console.log(
+            `${toSubscribe ? 'Registration' : 'Deletion'} to Epic notifications for ${
+                interaction.user.username
+            } is complete`
+        );
+    });
 }

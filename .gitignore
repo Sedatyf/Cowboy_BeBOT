@@ -1,6 +1,5 @@
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
@@ -18,4 +17,3 @@ sandbox.js
 
 # Project's data
 epicOutput.json
-subscribedUser.json
