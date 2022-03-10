@@ -93,7 +93,7 @@ function sutomBuildJson(jsonPath, message, sutomNumber, score) {
 
 /**
  * Get the json value for the current sutom
- * @param {string} jsonPath
+ * @param {string} jsonPath full filepath for json file
  * @returns {number} the current sutom value
  */
 function getCurrentSutom(jsonPath) {
