@@ -41,9 +41,25 @@ function generateTodayDate() {
  * @param {string} data
  */
 function writeFile(filepath, data) {
-    fs.writeFile(filepath, data, err => {
+    fs.writeFile(filepath, data, 'utf-8', err => {
         if (err) throw err;
     });
+}
+
+/**
+ * Read the given file and returns a string or a JSON object
+ * @param {string} filepath
+ * @returns {(JSON|string)} if it's a JSON, returns a JSON object, else a string
+ */
+function readFile(filepath) {
+    const buffer = fs.readFileSync(filepath);
+    const fileContent = buffer.toString();
+
+    if (filepath.endsWith('.json')) {
+        return JSON.parse(fileContent);
+    } else {
+        return fileContent;
+    }
 }
 
 /**
@@ -62,9 +78,7 @@ function sutomBuildJson(jsonPath, message, sutomNumber, score) {
         };
 
         const createUserJson = JSON.stringify(jsonData);
-        fs.writeFile(jsonPath, createUserJson, 'utf8', function (err) {
-            if (err) throw err;
-        });
+        writeFile(jsonPath, createUserJson);
     }
 
     if (typeof score !== 'number' || score < 1) {
@@ -74,9 +88,17 @@ function sutomBuildJson(jsonPath, message, sutomNumber, score) {
 
     jsonData['users'][message.author.username]['sutomScore'][sutomNumber] = score;
     const json = JSON.stringify(jsonData);
-    fs.writeFile(jsonPath, json, 'utf8', function (err) {
-        if (err) throw err;
-    });
+    writeFile(jsonPath, json);
+}
+
+/**
+ * Get the json value for the current sutom
+ * @param {string} jsonPath
+ * @returns {number} the current sutom value
+ */
+function getCurrentSutom(jsonPath) {
+    const sutomJson = readFile(jsonPath);
+    return sutomJson.currentSutom;
 }
 
 module.exports = {
@@ -84,5 +106,7 @@ module.exports = {
     getRandomIntInclusive,
     generateTodayDate,
     writeFile,
+    readFile,
     sutomBuildJson,
+    getCurrentSutom,
 };
