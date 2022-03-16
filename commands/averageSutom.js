@@ -1,8 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const path = require('path');
-const utils = require('../tools/utils.js');
-
-const SUTOM_JSON_PATH = path.join(__dirname, '..', 'data', 'sutomScore.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,8 +22,6 @@ module.exports = {
         for (const sutomScore in sutomJson['users'][user]['sutomScore']) {
             sum += sutomJson['users'][user]['sutomScore'][sutomScore];
         }
-        console.log(sum);
-        console.log(Object.keys(sutomJson['users'][user]['sutomScore']).length);
         const average = sum / Object.keys(sutomJson['users'][user]['sutomScore']).length;
         await interaction.reply(`La moyenne pour **${user}** est de **${average}**`);
     },
