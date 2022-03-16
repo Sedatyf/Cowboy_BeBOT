@@ -22,7 +22,8 @@ module.exports = {
         for (const sutomScore in sutomJson['users'][user]['sutomScore']) {
             sum += sutomJson['users'][user]['sutomScore'][sutomScore];
         }
-        const average = sum / Object.keys(sutomJson['users'][user]['sutomScore']).length;
+        let average = sum / Object.keys(sutomJson['users'][user]['sutomScore']).length;
+        average = Math.round((average + Number.EPSILON) * 100) / 100;
         await interaction.reply(`La moyenne pour **${user}** est de **${average}**`);
     },
 };
