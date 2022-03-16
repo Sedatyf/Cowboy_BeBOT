@@ -71,8 +71,9 @@ function readFile(filepath) {
  */
 function sutomBuildJson(jsonPath, message, sutomNumber, score) {
     const jsonData = require(`../${jsonPath}`);
-    if (!(message.author.username in jsonData['users'])) {
-        jsonData['users'][message.author.username] = {
+    const currentUser = message.author.username.toLowerCase();
+    if (!(currentUser in jsonData['users'])) {
+        jsonData['users'][currentUser] = {
             userInfo: message.author.id,
             sutomScore: {},
         };
@@ -86,7 +87,7 @@ function sutomBuildJson(jsonPath, message, sutomNumber, score) {
         return;
     }
 
-    jsonData['users'][message.author.username]['sutomScore'][sutomNumber] = score;
+    jsonData['users'][currentUser]['sutomScore'][sutomNumber] = score;
     const json = JSON.stringify(jsonData);
     writeFile(jsonPath, json);
 }
