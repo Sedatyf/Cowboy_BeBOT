@@ -13,11 +13,12 @@ module.exports = {
     async execute(interaction) {
         const sutomJson = require('../data/sutomScore.json');
         let user = '';
-        if (interaction.options.data[0] === null || interaction.options.data[0] === '') {
+        if (interaction.options.data[0] !== undefined) {
             user = interaction.options.data[0].value.toLowerCase();
         } else {
             user = interaction.user.username.toLowerCase();
         }
+        console.log(user);
         if (!(user in sutomJson.users)) {
             await interaction.reply(
                 `Je n'ai pas trouvé la personne ${interaction.options.data[0].value}`
