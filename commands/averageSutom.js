@@ -18,7 +18,6 @@ module.exports = {
         } else {
             user = interaction.user.username.toLowerCase();
         }
-        console.log(user);
         if (!(user in sutomJson.users)) {
             await interaction.reply(
                 `Je n'ai pas trouvé la personne ${interaction.options.data[0].value}`
