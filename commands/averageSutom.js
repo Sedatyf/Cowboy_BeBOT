@@ -8,11 +8,16 @@ module.exports = {
             option
                 .setName('player')
                 .setDescription('Le nom discord de la personne')
-                .setRequired(true)
+                .setRequired(false)
         ),
     async execute(interaction) {
         const sutomJson = require('../data/sutomScore.json');
-        const user = interaction.options.data[0].value.toLowerCase();
+        let user = '';
+        if (interaction.options.data[0] === null || interaction.options.data[0] === '') {
+            user = interaction.options.data[0].value.toLowerCase();
+        } else {
+            user = interaction.user.username.toLowerCase();
+        }
         if (!(user in sutomJson.users)) {
             await interaction.reply(
                 `Je n'ai pas trouvé la personne ${interaction.options.data[0].value}`
