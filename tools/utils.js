@@ -66,10 +66,11 @@ function readFile(filepath) {
  * Save a sutom score for a specific user
  * @param {string} jsonPath json's filepath
  * @param {Message} message client's message
- * @param {Number} sutomNumber the daily sutom number
+ * @param {string} gameScore the game score name as registered in dailyScore.json
+ * @param {Number} gameNumber the daily game's number
  * @param {Number} score user score
  */
-function sutomBuildJson(jsonPath, message, sutomNumber, score) {
+function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
     const jsonData = require(`../${jsonPath}`);
     const currentUser = message.author.username.toLowerCase();
     if (!(currentUser in jsonData['users'])) {
@@ -87,7 +88,7 @@ function sutomBuildJson(jsonPath, message, sutomNumber, score) {
         return;
     }
 
-    jsonData['users'][currentUser]['sutomScore'][sutomNumber] = score;
+    jsonData['users'][currentUser][gameScore][gameNumber] = score;
     const json = JSON.stringify(jsonData);
     writeFile(jsonPath, json);
 }
@@ -108,6 +109,6 @@ module.exports = {
     generateTodayDate,
     writeFile,
     readFile,
-    sutomBuildJson,
+    dailyBuildJson,
     getCurrentSutom,
 };
