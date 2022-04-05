@@ -63,11 +63,12 @@ const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
     }, 5000);
 });
 
-const jobCurrentSutom = schedule.scheduleJob('1 0 * * *', function () {
-    const jsonData = require('./data/sutomScore.json');
-    jsonData['currentSutom'] = jsonData['currentSutom'] + 1;
+const jobCurrentGame = schedule.scheduleJob('1 0 * * *', function () {
+    const jsonData = require('./data/dailyScore.json');
+    jsonData['currentNumber']['currentSutom'] = jsonData['currentNumber']['currentSutom'] + 1;
+    jsonData['currentNumber']['currentFramed'] = jsonData['currentNumber']['currentFramed'] + 1;
     const json = JSON.stringify(jsonData);
-    utils.writeFile('./data/sutomScore.json', json);
+    utils.writeFile('./data/dailyScore.json', json);
 });
 
 client.login(TOKEN);
