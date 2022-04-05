@@ -44,7 +44,8 @@ client.on('messageCreate', async message => {
     onMessageFunctions.goodNight.goodNight(client, message);
     // onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
     onMessageFunctions.reactLul.reactLul(client, message);
-    onMessageFunctions.saveSutomScore.saveSutomScore(client, message);
+    onMessageFunctions.saveDailyScore.saveSutomScore(client, message);
+    onMessageFunctions.saveDailyScore.saveFramedScore(client, message);
 });
 
 // cron job for free game on Epic
