@@ -12,6 +12,7 @@ module.exports = {
                 .setRequired(true)
                 .addChoice('Sutom', 'sutom')
                 .addChoice('Framed', 'framed')
+                .addChoice('Moviedle', 'moviedle')
         )
         .addStringOption(option2 =>
             option2.setName('user').setDescription("Le nom de l'utilisateur").setRequired(false)
@@ -23,6 +24,9 @@ module.exports = {
                 break;
             case 'framed':
                 await interaction.reply(tools.getAverageFramed(interaction));
+                break;
+            case 'moviedle':
+                await interaction.reply(tools.getAverageMoviedle(interaction));
                 break;
             default:
                 await interaction.reply('Erreur sur le choix du jeu');
