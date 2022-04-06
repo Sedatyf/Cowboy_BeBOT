@@ -56,7 +56,7 @@ Envoie match [nom1] [nom2] au 8 12 12`
     },
 };
 
-/* TODO : 81212 match: un calculateur de compatibilité
+/* TODO: 81212 match: un calculateur de compatibilité
           81212 musique
           81212 gif?
 */
