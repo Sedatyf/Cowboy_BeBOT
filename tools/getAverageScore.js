@@ -61,4 +61,34 @@ function getAverageFramed(interaction) {
     return `La moyenne à Framed pour **${user}** est de **${average}**`;
 }
 
-module.exports = { getAverageSutom, getAverageFramed };
+/**
+ * Get the average moviedle of the user using the command or
+ * get the average moviedle of the user mentionned in the command
+ * @param {Interaction} interaction user interaction
+ * @returns {string} message to reply
+ */
+function getAverageMoviedle(interaction) {
+    let user = '';
+
+    if (interaction.options.getString('user') !== null) {
+        user = interaction.options.getString('user').toLowerCase();
+    } else {
+        user = interaction.user.username.toLowerCase();
+    }
+
+    // Guard clause
+    if (!(user in dailyJson.users)) {
+        return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
+    }
+
+    let sum = 0;
+    for (const moviedleScore in dailyJson['users'][user]['moviedleScore']) {
+        sum += dailyJson['users'][user]['moviedleScore'][moviedleScore];
+    }
+
+    let average = sum / Object.keys(dailyJson['users'][user]['moviedleScore']).length;
+    average = Math.round((average + Number.EPSILON) * 100) / 100;
+    return `La moyenne à Moviedle pour **${user}** est de **${average}**`;
+}
+
+module.exports = { getAverageSutom, getAverageFramed, getAverageMoviedle };

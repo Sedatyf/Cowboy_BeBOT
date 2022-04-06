@@ -25,7 +25,7 @@ function getRandomIntInclusive(min, max) {
 
 /**
  * Get the date for the actual day (yyyy-mm-dd)
- * @returns {string} Retuns a string with today date
+ * @returns {string} Returns a string with today date
  */
 function generateTodayDate() {
     const date = new Date();
@@ -33,6 +33,21 @@ function generateTodayDate() {
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear();
     return `${year}-${month}-${day}`;
+}
+
+/**
+ * Get today date and add 1 day to it
+ * @returns {string} Returns d+1 with yyyy-mm-dd format
+ */
+function add1DayToTodayDate() {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 1);
+
+    const dd = targetDate.getDate();
+    const mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
+    const yyyy = targetDate.getFullYear();
+
+    return `${yyyy}-${mm}-${dd}`;
 }
 
 /**
@@ -107,6 +122,7 @@ module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
     generateTodayDate,
+    add1DayToTodayDate,
     writeFile,
     readFile,
     dailyBuildJson,
