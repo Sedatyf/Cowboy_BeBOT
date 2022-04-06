@@ -37,4 +37,30 @@ function saveFramedScore(client, discordMessage) {
     }
 }
 
-module.exports = { saveSutomScore, saveFramedScore };
+function saveMoviedleScore(client, discordMessage) {
+    const userMessage = discordMessage.cleanContent;
+    if (userMessage.includes('#Moviedle #')) {
+        const messageElements = userMessage.split(' ');
+
+        if (messageElements.length < 3) {
+            discordMessage.reply("T'essayes de m'arnaquer ? è_é");
+            return;
+        }
+
+        let moviedleScore = 1;
+        for (let i = 0; i < messageElements.length; i++) {
+            if (messageElements[i] === '🎥') continue;
+            if (messageElements[i] === '⬛️') moviedleScore++;
+        }
+        const moviedleNumber = messageElements[1].substring(1).replace('\n🎥', '');
+        utils.dailyBuildJson(
+            FILENAME,
+            discordMessage,
+            'moviedleScore',
+            moviedleNumber,
+            moviedleScore
+        );
+    }
+}
+
+module.exports = { saveSutomScore, saveFramedScore, saveMoviedleScore };

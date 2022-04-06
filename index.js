@@ -46,6 +46,7 @@ client.on('messageCreate', async message => {
     onMessageFunctions.reactLul.reactLul(client, message);
     onMessageFunctions.saveDailyScore.saveSutomScore(client, message);
     onMessageFunctions.saveDailyScore.saveFramedScore(client, message);
+    onMessageFunctions.saveDailyScore.saveMoviedleScore(client, message);
 });
 
 // cron job for free game on Epic
@@ -65,8 +66,12 @@ const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
 
 const jobCurrentGame = schedule.scheduleJob('1 0 * * *', function () {
     const jsonData = require('./data/dailyScore.json');
+    const currentMoviedle = utils.add1DayToTodayDate();
+
     jsonData['currentNumber']['currentSutom'] = jsonData['currentNumber']['currentSutom'] + 1;
     jsonData['currentNumber']['currentFramed'] = jsonData['currentNumber']['currentFramed'] + 1;
+    jsonData['currentNumber']['currentMoviedle'] = jsonData['currentNumber'][currentMoviedle];
+
     const json = JSON.stringify(jsonData);
     utils.writeFile('./data/dailyScore.json', json);
 });
