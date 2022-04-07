@@ -43,8 +43,8 @@ function add1DayToTodayDate() {
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 1);
 
-    const dd = targetDate.getDate();
-    const mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
+    const dd = ('0' + targetDate.getDate()).slice(-2);
+    const mm = ('0' + (targetDate.getMonth() + 1)).slice(-2); // 0 is January, so we must add 1
     const yyyy = targetDate.getFullYear();
 
     return `${yyyy}-${mm}-${dd}`;
