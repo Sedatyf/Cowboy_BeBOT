@@ -51,6 +51,7 @@ function saveMoviedleScore(client, discordMessage) {
         for (let i = 0; i < messageElements.length; i++) {
             if (messageElements[i] === '🎥') continue;
             if (messageElements[i] === '⬛️') moviedleScore++;
+            if (messageElements[i] === '🟥') moviedleScore++;
         }
         const moviedleNumber = messageElements[1].substring(1).replace('\n🎥', '');
         utils.dailyBuildJson(
