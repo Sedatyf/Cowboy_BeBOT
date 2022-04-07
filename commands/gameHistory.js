@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const tools = require('../tools/getHistoryScore');
+const getHistory = require('../tools/getHistoryScore');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,19 +18,7 @@ module.exports = {
             option2.setName('user').setDescription("Le nom de l'utilisateur").setRequired(false)
         ),
     async execute(interaction) {
-        switch (interaction.options.getString('game_name')) {
-            case 'sutom':
-                await interaction.reply(tools.historySutom(interaction));
-                break;
-            case 'framed':
-                await interaction.reply(tools.historyFramed(interaction));
-                break;
-            case 'moviedle':
-                await interaction.reply(tools.historyMoviedle(interaction));
-                break;
-            default:
-                await interaction.reply('Erreur sur le choix du jeu');
-                break;
-        }
+        const gameName = interaction.options.getString('game_name');
+        await interaction.reply(getHistory.getHistoryGame(interaction, gameName));
     },
 };
