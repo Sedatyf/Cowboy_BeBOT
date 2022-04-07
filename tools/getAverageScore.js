@@ -21,12 +21,14 @@ function getAverageSutom(interaction) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
 
+    const sutomScores = dailyJson['users'][user]['sutomScore'];
+
     let sum = 0;
-    for (const sutomScore in dailyJson['users'][user]['sutomScore']) {
-        sum += dailyJson['users'][user]['sutomScore'][sutomScore];
+    for (const sutomScore in sutomScores) {
+        sum += sutomScores[sutomScore];
     }
 
-    let average = sum / Object.keys(dailyJson['users'][user]['sutomScore']).length;
+    let average = sum / Object.keys(sutomScores).length;
     average = Math.round((average + Number.EPSILON) * 100) / 100;
     return `La moyenne au Sutom pour **${user}** est de **${average}**`;
 }
@@ -51,12 +53,14 @@ function getAverageFramed(interaction) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
 
+    const framedScores = dailyJson['users'][user]['framedScore'];
+
     let sum = 0;
-    for (const framedScore in dailyJson['users'][user]['framedScore']) {
-        sum += dailyJson['users'][user]['framedScore'][framedScore];
+    for (const framedScore in framedScores) {
+        sum += framedScores[framedScore];
     }
 
-    let average = sum / Object.keys(dailyJson['users'][user]['framedScore']).length;
+    let average = sum / Object.keys(framedScores).length;
     average = Math.round((average + Number.EPSILON) * 100) / 100;
     return `La moyenne à Framed pour **${user}** est de **${average}**`;
 }
@@ -81,12 +85,14 @@ function getAverageMoviedle(interaction) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
 
+    const moviedleScores = dailyJson['users'][user]['moviedleScore'];
+
     let sum = 0;
-    for (const moviedleScore in dailyJson['users'][user]['moviedleScore']) {
-        sum += dailyJson['users'][user]['moviedleScore'][moviedleScore];
+    for (const moviedleScore in moviedleScores) {
+        sum += moviedleScores[moviedleScore];
     }
 
-    let average = sum / Object.keys(dailyJson['users'][user]['moviedleScore']).length;
+    let average = sum / Object.keys(moviedleScores).length;
     average = Math.round((average + Number.EPSILON) * 100) / 100;
     return `La moyenne à Moviedle pour **${user}** est de **${average}**`;
 }
