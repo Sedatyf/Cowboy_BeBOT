@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 const { Interaction } = require('discord.js');
 const dailyScoreJson = require('../data/dailyScore.json');
+const utils = require('./utils');
 let keyValue = [];
 
 /**
@@ -9,13 +11,7 @@ let keyValue = [];
  * @returns {string} returns a message with history or an error
  */
 function historySutom(interaction) {
-    let user = '';
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
@@ -43,13 +39,7 @@ function historySutom(interaction) {
  * @returns {string} returns a message with history or an error
  */
 function historyFramed(interaction) {
-    let user = '';
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
@@ -77,13 +67,7 @@ function historyFramed(interaction) {
  * @returns {string} returns a message with history or an error
  */
 function historyMoviedle(interaction) {
-    let user = '';
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;

@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 const { Interaction } = require('discord.js');
 const dailyJson = require('../data/dailyScore.json');
+const utils = require('./utils');
 
 /**
  * Get the average sutom of the user using the command or
@@ -8,14 +10,7 @@ const dailyJson = require('../data/dailyScore.json');
  * @returns {string} message to reply
  */
 function getAverageSutom(interaction) {
-    let user = '';
-
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard clause
     if (!(user in dailyJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
@@ -40,14 +35,7 @@ function getAverageSutom(interaction) {
  * @returns {string} message to reply
  */
 function getAverageFramed(interaction) {
-    let user = '';
-
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard clause
     if (!(user in dailyJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
@@ -72,14 +60,7 @@ function getAverageFramed(interaction) {
  * @returns {string} message to reply
  */
 function getAverageMoviedle(interaction) {
-    let user = '';
-
-    if (interaction.options.getString('user') !== null) {
-        user = interaction.options.getString('user').toLowerCase();
-    } else {
-        user = interaction.user.username.toLowerCase();
-    }
-
+    const user = utils.verifyUserExistsJson(interaction);
     // Guard clause
     if (!(user in dailyJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;

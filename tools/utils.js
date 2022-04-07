@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const { Interaction } = require('discord.js');
 const fs = require('fs');
 
 /**
@@ -118,6 +119,22 @@ function getCurrentSutom(jsonPath) {
     return sutomJson.currentSutom;
 }
 
+/**
+ * @param {Interaction} interaction
+ * @returns {string} user name in lowercase or ''
+ */
+function verifyUserExistsJson(interaction) {
+    let user = '';
+
+    if (interaction.options.getString('user') !== null) {
+        user = interaction.options.getString('user').toLowerCase();
+    } else {
+        user = interaction.user.username.toLowerCase();
+    }
+
+    return user;
+}
+
 module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
@@ -127,4 +144,5 @@ module.exports = {
     readFile,
     dailyBuildJson,
     getCurrentSutom,
+    verifyUserExistsJson,
 };
