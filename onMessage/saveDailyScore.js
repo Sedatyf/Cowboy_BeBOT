@@ -12,7 +12,8 @@ function saveSutomScore(client, discordMessage) {
         }
 
         const sutomNumber = messageElements[1].substring(1);
-        const score = Number(messageElements[2].slice(0, 1));
+        let score = Number(messageElements[2].slice(0, 1));
+        if (score === null) score = 7;
         utils.dailyBuildJson(FILENAME, discordMessage, 'sutomScore', sutomNumber, score);
     }
 }
