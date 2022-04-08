@@ -1,8 +1,8 @@
 # Cowboy BeBOT
 
-J'ai décidé de faire un seul repo pour 2 versions possibles du BOT :
+I decided to make only one repo with 2 versions of this Bot:
 
-- Une version Python
-- Une version JavaScript
+- One version is in Python with Hikari
+- The other one is in JavaScript with Discord.js
 
-Il aurait fallu que je fasse deux versions avec Python, une avec Pycord et une autre avec Hikari, mais bon.
+The Python version is dropped and not maintained anymore, it was just a quick test in order to see how Hikari was
