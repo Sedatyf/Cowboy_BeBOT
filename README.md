@@ -1,6 +1,3 @@
 # Cowboy_BeBOT
-Cette branche contient la version JavaScript du bot
-
-Comme j'apprends JavaScript, et qu'en plus le framework `Discord.js` est plutôt puissant et bien maintenu, j'ai voulu essayé
-
-C'est assez prometteur et je pense rester dessus
+At the time, I was learning JavaScript, so I thought I could make a bot with Discord.js in order to practice the language
+It was a ton of fun so I continued to develop this bot for my server
