@@ -1,4 +1,5 @@
 # Cowboy_BeBOT
-Cette branche contient la version Python du bot
-Avec la fin de `discord.py`, j'ai eu du mal à trouver mon bonheur.
-La version actuelle est sur `Hikari`, mais j'avais essayé `PyCord` qui fonctionnait bien aussi. Mais je crois que j'ai perdu mon code
+
+This branch has the Bot in Python  
+With the end of `discord.py`, I searched for a new framework.  
+So I tried `Hikari` with a quick and dirty bot and this is the result.
