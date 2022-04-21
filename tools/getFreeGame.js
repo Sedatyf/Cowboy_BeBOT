@@ -58,7 +58,7 @@ function getGamesFromData(client, gamesData) {
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
             client.channels.cache
                 .get(channelIDs.informations)
-                .send(`https://www.epicgames.com/store/fr/p/${element.productSlug}?lang=fr`);
+                .send(`https://store.epicgames.com/fr/p/${element.catalogNs.mappings[0].pageSlug}`);
         }
     }
 }
