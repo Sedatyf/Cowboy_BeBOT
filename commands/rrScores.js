@@ -23,7 +23,7 @@ module.exports = {
         const scoresJson = require('../data/ragdollScore.json');
         const keyValue = [];
 
-        for (const [user, value] of Object.entries(scoresJson['games']['10m'])) {
+        for (const [user, value] of Object.entries(scoresJson['games'][gameName])) {
             keyValue.push([user, value]);
         }
 
