@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 const { Message } = require('discord.js');
 const { Interaction } = require('discord.js');
+/* eslint-disable no-unused-vars */
 const fs = require('fs');
 
 /**
@@ -110,6 +112,59 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
 }
 
 /**
+ * Save a time/distance score for a specific user
+ * @param {string} jsonPath json's filepath
+ * @param {Interaction} interaction user interaction
+ * @param {string} eventName the event's name as shown in ragdollScore.json
+ * @param {Number} score time/distance of the user
+ */
+function ragdollBuildJson(jsonPath, interaction, eventName, score) {
+    const jsonData = require(`../${jsonPath}`);
+    const currentUser = verifyUserExistsJson(interaction);
+
+    if (!(currentUser in jsonData['games'][eventName])) {
+        jsonData['games'][eventName] = {
+            [currentUser]: 0,
+        };
+
+        const createUserJson = JSON.stringify(jsonData);
+        writeFile(jsonPath, createUserJson);
+    }
+
+    const conditions = [',', 's', 'm'];
+    if (conditions.some(el => score.includes(el))) {
+        score = score.replace(',', '.');
+        score = score.replace('s', '');
+        score = score.replace('m', '');
+    }
+
+    const currentScore = parseFloat(score);
+    const registeredScore = jsonData['games'][eventName][currentUser];
+    switch (eventName) {
+        case '10m':
+        case '30m':
+        case '60m':
+        case '100m':
+        case '60Herdles':
+        case '110Herdles':
+            if (currentScore < registeredScore || registeredScore === 0) {
+                jsonData['games'][eventName][currentUser] = currentScore;
+                const json = JSON.stringify(jsonData);
+                writeFile(jsonPath, json);
+            }
+            break;
+        case 'tripleJump':
+        case 'longJump':
+            if (currentScore > registeredScore || registeredScore === 0) {
+                jsonData['games'][eventName][currentUser] = currentScore;
+                const json = JSON.stringify(jsonData);
+                writeFile(jsonPath, json);
+            }
+            break;
+    }
+}
+
+/**
  * Get the json value for the current sutom
  * @param {string} jsonPath full filepath for json file
  * @returns {number} the current sutom value
@@ -143,6 +198,7 @@ module.exports = {
     writeFile,
     readFile,
     dailyBuildJson,
+    ragdollBuildJson,
     getCurrentSutom,
     verifyUserExistsJson,
 };
