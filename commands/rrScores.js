@@ -25,6 +25,7 @@ module.exports = {
 
         for (const [user, events] of Object.entries(scoresJson['users'])) {
             for (const [event, score] of Object.entries(events)) {
+                if (score === 0) continue;
                 if (gameName === event) keyValue.push([user, score]);
             }
         }
