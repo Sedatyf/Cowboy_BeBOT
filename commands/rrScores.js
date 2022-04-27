@@ -23,8 +23,10 @@ module.exports = {
         const scoresJson = require('../data/ragdollScore.json');
         const keyValue = [];
 
-        for (const [user, value] of Object.entries(scoresJson['games'][gameName])) {
-            keyValue.push([user, value]);
+        for (const [user, events] of Object.entries(scoresJson['users'])) {
+            for (const [event, score] of Object.entries(events)) {
+                if (gameName === event) keyValue.push([user, score]);
+            }
         }
 
         keyValue.sort(function (a, b) {
