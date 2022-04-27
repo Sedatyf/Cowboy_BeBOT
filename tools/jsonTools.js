@@ -3,6 +3,7 @@ const { Message } = require('discord.js');
 const { Interaction } = require('discord.js');
 /* eslint-disable no-unused-vars */
 const utils = require('./utils');
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
  * Save a sutom score for a specific user
@@ -42,13 +43,20 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
  * @param {string} eventName the event's name as shown in ragdollScore.json
  * @param {Number} score time/distance of the user
  */
-function ragdollBuildJson(jsonPath, interaction, eventName, score) {
+async function ragdollBuildJson(jsonPath, interaction, eventName, score) {
     const jsonData = require(`../${jsonPath}`);
     const currentUser = verifyUserExistsJson(interaction);
 
-    if (!(currentUser in jsonData['games'][eventName])) {
-        jsonData['games'][eventName] = {
-            [currentUser]: 0,
+    if (!(currentUser in jsonData['users'])) {
+        jsonData['users'][currentUser] = {
+            '10m': 0,
+            '30m': 0,
+            '60m': 0,
+            '100m': 0,
+            tripleJump: 0,
+            longJump: 0,
+            '60Herdles': 0,
+            '110Herdles': 0,
         };
 
         const createUserJson = JSON.stringify(jsonData);
@@ -63,7 +71,8 @@ function ragdollBuildJson(jsonPath, interaction, eventName, score) {
     }
 
     const currentScore = parseFloat(score);
-    const registeredScore = jsonData['games'][eventName][currentUser];
+    const registeredScore = jsonData['users'][currentUser][eventName];
+
     switch (eventName) {
         case '10m':
         case '30m':
@@ -72,16 +81,18 @@ function ragdollBuildJson(jsonPath, interaction, eventName, score) {
         case '60Herdles':
         case '110Herdles':
             if (currentScore < registeredScore || registeredScore === 0) {
-                jsonData['games'][eventName][currentUser] = currentScore;
+                jsonData['users'][currentUser][eventName] = currentScore;
                 const json = JSON.stringify(jsonData);
+                await delay(200); // mandatory delay otherwise we'll have error in JSON
                 utils.writeFile(jsonPath, json);
             }
             break;
         case 'tripleJump':
         case 'longJump':
             if (currentScore > registeredScore || registeredScore === 0) {
-                jsonData['games'][eventName][currentUser] = currentScore;
+                jsonData['users'][currentUser][eventName] = currentScore;
                 const json = JSON.stringify(jsonData);
+                await delay(200); // mandatory delay otherwise we'll have error in JSON
                 utils.writeFile(jsonPath, json);
             }
             break;
