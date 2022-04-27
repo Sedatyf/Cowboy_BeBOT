@@ -28,10 +28,24 @@ module.exports = {
                 if (gameName === event) keyValue.push([user, score]);
             }
         }
-
-        keyValue.sort(function (a, b) {
-            return a[1] - b[1];
-        });
+        switch (gameName) {
+            case '10m':
+            case '30m':
+            case '60m':
+            case '100m':
+            case '60Herdles':
+            case '110Herdles':
+                keyValue.sort(function (a, b) {
+                    return a[1] - b[1];
+                });
+                break;
+            case 'tripleJump':
+            case 'longJump':
+                keyValue.sort(function (a, b) {
+                    return b[1] - a[1];
+                });
+                break;
+        }
 
         let message = '';
         for (let i = 0; i < keyValue.length; i++) {
