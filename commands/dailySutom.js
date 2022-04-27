@@ -30,7 +30,6 @@ module.exports = {
             await interaction.reply("Je n'ai enregistré aucun score pour aujourd'hui");
         } else {
             let message = '';
-            console.log(keyValue);
             for (let i = 0; i < keyValue.length; i++) {
                 message += `${keyValue[i][0]} : ${keyValue[i][1]}\r\n`;
             }

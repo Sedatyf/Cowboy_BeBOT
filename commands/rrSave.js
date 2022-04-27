@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const utils = require('../tools/utils');
+const jsonTools = require('../tools/jsonTools');
 const FILENAME = 'data/ragdollScore.json';
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
         const score = interaction.options.getString('score');
-        utils.ragdollBuildJson(FILENAME, interaction, gameName, score);
+        jsonTools.ragdollBuildJson(FILENAME, interaction, gameName, score);
         await interaction.reply(
             `Ton score pour **${gameName}** de **${score}** a bien été enregistré !`
         );

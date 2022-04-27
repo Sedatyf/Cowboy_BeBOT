@@ -1,4 +1,4 @@
-const utils = require('../tools/utils');
+const jsonTools = require('../tools/jsonTools');
 const FILENAME = 'data/dailyScore.json';
 
 function saveSutomScore(client, discordMessage) {
@@ -14,7 +14,7 @@ function saveSutomScore(client, discordMessage) {
         const sutomNumber = messageElements[1].substring(1);
         let score = Number(messageElements[2].slice(0, 1));
         if (score === null) score = 7;
-        utils.dailyBuildJson(FILENAME, discordMessage, 'sutomScore', sutomNumber, score);
+        jsonTools.dailyBuildJson(FILENAME, discordMessage, 'sutomScore', sutomNumber, score);
     }
 }
 
@@ -34,7 +34,13 @@ function saveFramedScore(client, discordMessage) {
             if (messageElements[i] === '🟥') framedScore++;
         }
         const framedNumber = messageElements[1].substring(1).replace('\n🎥', '');
-        utils.dailyBuildJson(FILENAME, discordMessage, 'framedScore', framedNumber, framedScore);
+        jsonTools.dailyBuildJson(
+            FILENAME,
+            discordMessage,
+            'framedScore',
+            framedNumber,
+            framedScore
+        );
     }
 }
 
@@ -55,7 +61,7 @@ function saveMoviedleScore(client, discordMessage) {
             if (messageElements[i] === '🟥') moviedleScore++;
         }
         const moviedleNumber = messageElements[1].substring(1).replace('\n🎥', '');
-        utils.dailyBuildJson(
+        jsonTools.dailyBuildJson(
             FILENAME,
             discordMessage,
             'moviedleScore',

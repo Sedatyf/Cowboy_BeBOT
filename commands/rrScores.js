@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const keyValue = [];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -22,6 +21,7 @@ module.exports = {
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
         const scoresJson = require('../data/ragdollScore.json');
+        const keyValue = [];
 
         for (const [user, value] of Object.entries(scoresJson['games']['10m'])) {
             keyValue.push([user, value]);

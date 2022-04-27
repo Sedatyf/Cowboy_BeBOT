@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Interaction } = require('discord.js');
 const dailyScoreJson = require('../data/dailyScore.json');
-const utils = require('./utils');
+const jsonTools = require('./jsonTools');
 let keyValue = [];
 
 /**
@@ -12,7 +12,7 @@ let keyValue = [];
  * @returns {string} returns a message with history or an error
  */
 function getHistoryGame(interaction, gameName) {
-    const user = utils.verifyUserExistsJson(interaction);
+    const user = jsonTools.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;

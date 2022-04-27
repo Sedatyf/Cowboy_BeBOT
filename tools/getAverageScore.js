@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const { Interaction } = require('discord.js');
 const dailyJson = require('../data/dailyScore.json');
-const utils = require('./utils');
+const jsonTools = require('./jsonTools');
 
 /**
  * Get the average score of the user using the command or
@@ -11,7 +11,7 @@ const utils = require('./utils');
  * @returns {string} message to reply
  */
 function getAverageScore(interaction, gameName) {
-    const user = utils.verifyUserExistsJson(interaction);
+    const user = jsonTools.verifyUserExistsJson(interaction);
     // Guard clause
     if (!(user in dailyJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
