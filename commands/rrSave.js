@@ -9,7 +9,7 @@ module.exports = {
         .addStringOption(option1 =>
             option1
                 .setName('game_name')
-                .setDescription("Le nom de l'épreuuve")
+                .setDescription("Le nom de l'épreuve")
                 .setRequired(true)
                 .addChoice('10m', '10m')
                 .addChoice('30m', '30m')

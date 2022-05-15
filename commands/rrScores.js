@@ -7,7 +7,7 @@ module.exports = {
         .addStringOption(option1 =>
             option1
                 .setName('game_name')
-                .setDescription("Le nom de l'épreuuve")
+                .setDescription("Le nom de l'épreuve")
                 .setRequired(true)
                 .addChoice('10m', '10m')
                 .addChoice('30m', '30m')
@@ -56,7 +56,7 @@ module.exports = {
             if (i > 2) message += `${i + 1}ème **${keyValue[i][0]}** : ${keyValue[i][1]}\r\n`;
         }
         await interaction.reply(
-            `Voici les scores que j'ai enregistrés pour l'épreuve du ${gameName}`
+            `Voici les scores que j'ai enregistrés pour l'épreuve du **${gameName}**`
         );
         await interaction.channel.send(message);
     },
