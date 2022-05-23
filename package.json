@@ -4,7 +4,6 @@
   "description": "La version JS de CowboyBeBOT",
   "main": "index.js",
   "scripts": {
-    "test": "jenkins-mocha",
     "local-test": "jest"
   },
   "author": "Sedatyf",
@@ -23,7 +22,6 @@
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "jest": "^28.1.0",
-    "jest-discordjs-mocks": "^1.0.0"
+    "jest": "^28.1.0"
   }
 }
