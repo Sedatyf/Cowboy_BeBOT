@@ -83,7 +83,7 @@ function readFile(filepath) {
  */
 function getCurrentSutom(jsonPath) {
     const sutomJson = readFile(jsonPath);
-    return sutomJson.currentSutom;
+    return sutomJson.currentNumber.currentSutom;
 }
 
 module.exports = {
