@@ -1,7 +1,6 @@
 const jsonTools = require('../tools/jsonTools');
-const FILENAME = 'data/dailyScore.json';
 
-function saveSutomScore(discordMessage) {
+function saveSutomScore(filepath, discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('SUTOM #')) {
         const messageElements = userMessage.split(' ');
@@ -14,12 +13,12 @@ function saveSutomScore(discordMessage) {
         const sutomNumber = messageElements[1].substring(1);
         let score = Number(messageElements[2].slice(0, 1));
         if (score === null) score = 7;
-        jsonTools.dailyBuildJson(FILENAME, discordMessage, 'sutomScore', sutomNumber, score);
+        jsonTools.dailyBuildJson(filepath, discordMessage, 'sutomScore', sutomNumber, score);
         console.log(`Saved Sutom score for ${discordMessage.author.username.toLowerCase()}`);
     }
 }
 
-function saveFramedScore(discordMessage) {
+function saveFramedScore(filepath, discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('Framed #')) {
         const messageElements = userMessage.split(' ');
@@ -36,7 +35,7 @@ function saveFramedScore(discordMessage) {
         }
         const framedNumber = messageElements[1].substring(1).replace('\n🎥', '');
         jsonTools.dailyBuildJson(
-            FILENAME,
+            filepath,
             discordMessage,
             'framedScore',
             framedNumber,
@@ -46,7 +45,7 @@ function saveFramedScore(discordMessage) {
     }
 }
 
-function saveMoviedleScore(discordMessage) {
+function saveMoviedleScore(filepath, discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('#Moviedle #')) {
         const messageElements = userMessage.split(' ');
@@ -64,7 +63,7 @@ function saveMoviedleScore(discordMessage) {
         }
         const moviedleNumber = messageElements[1].substring(1).replace('\n🎥', '');
         jsonTools.dailyBuildJson(
-            FILENAME,
+            filepath,
             discordMessage,
             'moviedleScore',
             moviedleNumber,

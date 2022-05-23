@@ -11,6 +11,7 @@ const epicOutputFullpath = process.cwd() + '/data/epicOutput.json';
 
 require('dotenv').config();
 const TOKEN = process.env.BOT_TOKEN;
+const FILENAME = 'data/dailyScore.json';
 
 // Variable initialisation
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -44,9 +45,9 @@ client.on('messageCreate', async message => {
     onMessageFunctions.goodNight.goodNight(client, message);
     // onMessageFunctions.replyLul.replyLul(client, message); it was a bit spammy so replaced by reactLul for now
     onMessageFunctions.reactLul.reactLul(client, message);
-    onMessageFunctions.saveDailyScore.saveSutomScore(message);
-    onMessageFunctions.saveDailyScore.saveFramedScore(message);
-    onMessageFunctions.saveDailyScore.saveMoviedleScore(message);
+    onMessageFunctions.saveDailyScore.saveSutomScore(FILENAME, message);
+    onMessageFunctions.saveDailyScore.saveFramedScore(FILENAME, message);
+    onMessageFunctions.saveDailyScore.saveMoviedleScore(FILENAME, message);
 });
 
 // cron job for free game on Epic
