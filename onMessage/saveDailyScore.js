@@ -1,7 +1,7 @@
 const jsonTools = require('../tools/jsonTools');
 const FILENAME = 'data/dailyScore.json';
 
-function saveSutomScore(client, discordMessage) {
+function saveSutomScore(discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('SUTOM #')) {
         const messageElements = userMessage.split(' ');
@@ -19,7 +19,7 @@ function saveSutomScore(client, discordMessage) {
     }
 }
 
-function saveFramedScore(client, discordMessage) {
+function saveFramedScore(discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('Framed #')) {
         const messageElements = userMessage.split(' ');
@@ -46,7 +46,7 @@ function saveFramedScore(client, discordMessage) {
     }
 }
 
-function saveMoviedleScore(client, discordMessage) {
+function saveMoviedleScore(discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (userMessage.includes('#Moviedle #')) {
         const messageElements = userMessage.split(' ');
