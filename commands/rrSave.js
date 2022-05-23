@@ -33,5 +33,6 @@ module.exports = {
         await interaction.reply(
             `Ton score pour **${gameName}** de **${score}** a bien été enregistré !`
         );
+        console.log(`Saved ${gameName} score for ${interaction.options.getString('user')}`);
     },
 };
