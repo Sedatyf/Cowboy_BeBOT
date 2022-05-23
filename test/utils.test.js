@@ -1,7 +1,7 @@
 const utils = require('../tools/utils');
 const path = require('path');
 
-const SUTOM_JSON_PATH = path.join(__dirname, 'testData', 'test_dailyScore.json');
+const SUTOM_JSON_PATH = path.join(__dirname, 'testData', 'dailyScore.test.json');
 
 describe('Verify Get current sutom data', () => {
     it('should return 135', () => {
