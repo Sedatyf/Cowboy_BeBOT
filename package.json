@@ -4,7 +4,8 @@
   "description": "La version JS de CowboyBeBOT",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jenkins-mocha",
+    "local-test": "mocha"
   },
   "author": "Sedatyf",
   "license": "ISC",
@@ -21,6 +22,8 @@
   "devDependencies": {
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "jenkins-mocha": "^9.0.0",
+    "mocha": "^10.0.0"
   }
 }
