@@ -15,6 +15,7 @@ function saveSutomScore(client, discordMessage) {
         let score = Number(messageElements[2].slice(0, 1));
         if (score === null) score = 7;
         jsonTools.dailyBuildJson(FILENAME, discordMessage, 'sutomScore', sutomNumber, score);
+        console.log(`Saved Sutom score for ${discordMessage.author.username.toLowerCase()}`);
     }
 }
 
@@ -41,6 +42,7 @@ function saveFramedScore(client, discordMessage) {
             framedNumber,
             framedScore
         );
+        console.log(`Saved Framed score for ${discordMessage.author.username.toLowerCase()}`);
     }
 }
 
@@ -68,6 +70,7 @@ function saveMoviedleScore(client, discordMessage) {
             moviedleNumber,
             moviedleScore
         );
+        console.log(`Saved Moviedle score for ${discordMessage.author.username.toLowerCase()}`);
     }
 }
 
