@@ -42,6 +42,8 @@ function reminderFreeGame(client, epicOutputFullpath) {
  */
 function getGamesFromData(client, gamesData) {
     const todayDate = new Date(utils.generateTodayDate());
+    let baseLink = 'https://store.epicgames.com/fr/p/';
+
     for (const element of gamesData) {
         if (element.price.totalPrice.discountPrice === 0 && element.promotions !== null) {
             try {
@@ -55,10 +57,18 @@ function getGamesFromData(client, gamesData) {
             } catch (error) {
                 continue;
             }
+
+            let link = '';
+
+            if (element.offerType === 'BUNDLE') {
+                baseLink = 'https://store.epicgames.com/fr/bundles/';
+                link = `${baseLink}${element['customAttributes'][3]['value']}`;
+            } else {
+                link = `${baseLink}${element.catalogNs.mappings[0].pageSlug}`;
+            }
+
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
-            client.channels.cache
-                .get(channelIDs.informations)
-                .send(`https://store.epicgames.com/fr/p/${element.catalogNs.mappings[0].pageSlug}`);
+            client.channels.cache.get(channelIDs.informations).send(link);
         }
     }
 }

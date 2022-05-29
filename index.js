@@ -51,6 +51,7 @@ client.on('messageCreate', async message => {
 });
 
 // cron job for free game on Epic
+// eslint-disable-next-line no-unused-vars
 const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
     getEpicData.getEpicData(constants.epicGameLink);
     setTimeout(() => {
@@ -58,6 +59,7 @@ const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
     }, 5000);
 });
 
+// eslint-disable-next-line no-unused-vars
 const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
     getEpicData.getEpicData(constants.epicGameLink);
     setTimeout(() => {
@@ -65,6 +67,7 @@ const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
     }, 5000);
 });
 
+// eslint-disable-next-line no-unused-vars
 const jobCurrentGame = schedule.scheduleJob('1 0 * * *', function () {
     const jsonData = require('./data/dailyScore.json');
     const currentMoviedle = utils.add1DayToTodayDate();
