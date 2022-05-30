@@ -73,4 +73,31 @@ function saveMoviedleScore(filepath, discordMessage) {
     }
 }
 
-module.exports = { saveSutomScore, saveFramedScore, saveMoviedleScore };
+function savePosterdleScore(filepath, discordMessage) {
+    const userMessage = discordMessage.cleanContent;
+    if (userMessage.includes('#Posterdle #')) {
+        const messageElements = userMessage.split('\n');
+
+        const sharpText = messageElements[0];
+        const timeToFind = messageElements[2];
+        let time = '';
+
+        const currentPoster = sharpText.split('#')[2].trim();
+        timeToFind.split('').forEach(element => {
+            if (!isNaN(parseInt(element))) {
+                time += element;
+            }
+        });
+
+        jsonTools.dailyBuildJson(
+            filepath,
+            discordMessage,
+            'posterdleScore',
+            currentPoster,
+            parseInt(time)
+        );
+        console.log(`Saved Posterdle score for ${discordMessage.author.username.toLowerCase()}`);
+    }
+}
+
+module.exports = { saveSutomScore, saveFramedScore, saveMoviedleScore, savePosterdleScore };

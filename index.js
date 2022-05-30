@@ -48,6 +48,7 @@ client.on('messageCreate', async message => {
     onMessageFunctions.saveDailyScore.saveSutomScore(FILENAME, message);
     onMessageFunctions.saveDailyScore.saveFramedScore(FILENAME, message);
     onMessageFunctions.saveDailyScore.saveMoviedleScore(FILENAME, message);
+    onMessageFunctions.saveDailyScore.savePosterdleScore(FILENAME, message);
 });
 
 // cron job for free game on Epic
