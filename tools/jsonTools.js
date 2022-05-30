@@ -22,6 +22,7 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
             sutomScore: {},
             framedScore: {},
             moviedleScore: {},
+            posterdleScore: {},
         };
 
         const createUserJson = JSON.stringify(jsonData);
