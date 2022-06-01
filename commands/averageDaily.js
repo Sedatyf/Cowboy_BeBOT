@@ -13,7 +13,7 @@ module.exports = {
                 .addChoice('Sutom', 'sutom')
                 .addChoice('Framed', 'framed')
                 .addChoice('Moviedle', 'moviedle')
-                .addChoise('Posterdle', 'posterdle')
+                .addChoice('Posterdle', 'posterdle')
         )
         .addStringOption(option2 =>
             option2.setName('user').setDescription("Le nom de l'utilisateur").setRequired(false)
