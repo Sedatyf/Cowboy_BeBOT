@@ -29,8 +29,9 @@ function getAverageScore(interaction, gameName) {
     average = Math.round((average + Number.EPSILON) * 100) / 100;
     const titledGameName =
         gameName.charAt(0).toUpperCase() + gameName.substring(1, gameName.length);
-    return `La moyenne à ${titledGameName} pour **${user}**,
-    avec **${Object.keys(scores).length}** participations, est de **${average}**`;
+    return `La moyenne à ${titledGameName} pour **${user}**, avec **${
+        Object.keys(scores).length
+    }** participations, est de **${average}**`;
 }
 
 module.exports = { getAverageScore };
