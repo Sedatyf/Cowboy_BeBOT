@@ -14,7 +14,10 @@ function saveSutomScore(filepath, discordMessage) {
         let score = Number(messageElements[2].slice(0, 1));
         if (score === null) score = 7;
         jsonTools.dailyBuildJson(filepath, discordMessage, 'sutomScore', sutomNumber, score);
-        console.log(`Saved Sutom score for ${discordMessage.author.username.toLowerCase()}`);
+        console.log(`The following Sutom Score has been saved:
+User: ${discordMessage.author.username}
+Sutom number: ${sutomNumber}
+Score: ${score}`);
     }
 }
 
@@ -41,7 +44,10 @@ function saveFramedScore(filepath, discordMessage) {
             framedNumber,
             framedScore
         );
-        console.log(`Saved Framed score for ${discordMessage.author.username.toLowerCase()}`);
+        console.log(`The following Framed Score has been saved:
+User: ${discordMessage.author.username}
+Framed number: ${framedNumber}
+Score: ${framedScore}`);
     }
 }
 
@@ -69,7 +75,10 @@ function saveMoviedleScore(filepath, discordMessage) {
             moviedleNumber,
             moviedleScore
         );
-        console.log(`Saved Moviedle score for ${discordMessage.author.username.toLowerCase()}`);
+        console.log(`The following Moviedle Score has been saved:
+User: ${discordMessage.author.username}
+Moviedle number: ${moviedleNumber}
+Score: ${moviedleScore}`);
     }
 }
 
@@ -96,7 +105,10 @@ function savePosterdleScore(filepath, discordMessage) {
             currentPoster,
             parseInt(time)
         );
-        console.log(`Saved Posterdle score for ${discordMessage.author.username.toLowerCase()}`);
+        console.log(`The following Posterdle Score has been saved:
+User: ${discordMessage.author.username}
+Posterdle number: ${currentPoster}
+Score: ${time}`);
     }
 }
 
