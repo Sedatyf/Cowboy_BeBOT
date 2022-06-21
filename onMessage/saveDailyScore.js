@@ -52,8 +52,12 @@ Score: ${framedScore}`);
 }
 
 function saveMoviedleScore(filepath, discordMessage) {
-    const userMessage = discordMessage.cleanContent;
-    if (userMessage.includes('#Moviedle #')) {
+    let userMessage = discordMessage.cleanContent;
+    if (userMessage.includes('#Moviedle #') || userMessage.includes('#Moviedle for')) {
+        if (userMessage.includes('#Moviedle for')) {
+            userMessage = userMessage.replace('From the ', '');
+            userMessage = userMessage.replace(' for', '');
+        }
         const messageElements = userMessage.split(' ');
 
         if (messageElements.length < 3) {
