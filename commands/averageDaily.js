@@ -20,6 +20,6 @@ module.exports = {
         ),
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
-        await interaction.reply(getAverage.getAverageScore(interaction, gameName));
+        await interaction.reply(getAverage.getAverageScoreFromMessage(interaction, gameName));
     },
 };
