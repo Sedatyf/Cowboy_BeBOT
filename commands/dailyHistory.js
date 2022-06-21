@@ -3,8 +3,8 @@ const getHistory = require('../tools/getHistoryScore');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('historygame')
-        .setDescription("Affiche les cinq derniers scores d'une personne sur un jeu")
+        .setName('dailyhistory')
+        .setDescription("Affiche les cinq derniers scores d'une personne sur un jeu de type daily")
         .addStringOption(option1 =>
             option1
                 .setName('game_name')
