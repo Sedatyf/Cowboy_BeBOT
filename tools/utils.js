@@ -86,6 +86,10 @@ function getCurrentSutom(jsonPath) {
     return sutomJson.currentNumber.currentSutom;
 }
 
+function title(stringToTitle) {
+    return stringToTitle.charAt(0).toUpperCase() + stringToTitle.substring(1, stringToTitle.length);
+}
+
 module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
@@ -94,4 +98,5 @@ module.exports = {
     writeFile,
     readFile,
     getCurrentSutom,
+    title,
 };

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const getAverage = require('../tools/getAverageScore');
+const utils = require('../tools/utils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -40,9 +41,8 @@ module.exports = {
             });
         }
 
-        let message = `Voici les moyennes de scores de tous les joueurs sur **${gameName.replace(
-            'Score',
-            ''
+        let message = `Voici les moyennes de scores de tous les joueurs sur **${utils.title(
+            gameName.replace('Score', '')
         )}**:\r\n`;
         for (const [position, data] of Object.entries(dict[gameName])) {
             const user = data[0];
@@ -51,7 +51,9 @@ module.exports = {
 
             if (length < 10) continue;
 
-            message += `\r\n${user} : **${average}** de moyenne avec **${length}** participations`;
+            message += `\r\n**${utils.title(
+                user
+            )}** :arrow_right: **${average}** de moyenne avec **${length}** participations`;
         }
 
         await interaction.reply(message);
