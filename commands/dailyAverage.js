@@ -3,7 +3,7 @@ const getAverage = require('../tools/getAverageScore');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('averagedaily')
+        .setName('dailyaverage')
         .setDescription("Affiche la moyenne des scores d'une personne")
         .addStringOption(option1 =>
             option1
