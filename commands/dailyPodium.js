@@ -49,6 +49,8 @@ module.exports = {
             const average = data[1][0];
             const length = data[1][1];
 
+            if (length < 10) continue;
+
             message += `\r\n${user} : **${average}** de moyenne avec **${length}** participations`;
         }
 
