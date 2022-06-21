@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 const getAverage = require('../tools/getAverageScore');
 const utils = require('../tools/utils');
 
@@ -22,6 +23,10 @@ module.exports = {
         const dict = {
             [gameName]: [],
         };
+        const resultEmbed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(`Scores ${utils.title(gameName.replace('Score', ''))}`)
+            .setDescription('Moyenne de score');
 
         for (const [user, events] of Object.entries(scoresJson['users'])) {
             for (const [eventName, scores] of Object.entries(events)) {
@@ -41,9 +46,6 @@ module.exports = {
             });
         }
 
-        let message = `Voici les moyennes de scores de tous les joueurs sur **${utils.title(
-            gameName.replace('Score', '')
-        )}**:\r\n`;
         for (const [position, data] of Object.entries(dict[gameName])) {
             const user = data[0];
             const average = data[1][0];
@@ -51,11 +53,9 @@ module.exports = {
 
             if (length < 10) continue;
 
-            message += `\r\n**${utils.title(
-                user
-            )}** :arrow_right: **${average}** de moyenne avec **${length}** participations`;
+            resultEmbed.addField(utils.title(user), `${average} (${length} participations)`, false);
         }
 
-        await interaction.reply(message);
+        await interaction.reply({ embeds: [resultEmbed] });
     },
 };
