@@ -63,8 +63,10 @@ function getGamesFromData(client, gamesData) {
             if (element.offerType === 'BUNDLE') {
                 baseLink = 'https://store.epicgames.com/fr/bundles/';
                 link = `${baseLink}${element['customAttributes'][3]['value']}`;
-            } else {
+            } else if (element.productSlug !== null) {
                 link = `${baseLink}${element.productSlug}`;
+            } else {
+                link = `${baseLink}${element.catalogNs.mappings[0].pageSlug}`;
             }
 
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
