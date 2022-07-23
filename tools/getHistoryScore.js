@@ -9,15 +9,17 @@ let keyValue = [];
  * or the precised one with options
  * @param {Interaction} interaction
  * @param {string} gameName game's name in choices
+ * @param {string} entries the number of entries you want to display (default 5)
  * @returns {string} returns a message with history or an error
  */
-function getHistoryGame(interaction, gameName) {
+function getHistoryGame(interaction, gameName, entries = '5') {
     const user = jsonTools.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
 
+    const intEntries = parseInt(entries);
     const scoreName = gameName + 'Score';
     const scores = dailyScoreJson['users'][user][scoreName];
 
@@ -25,7 +27,7 @@ function getHistoryGame(interaction, gameName) {
         keyValue.push([score, scores[score]]);
     }
 
-    keyValue = keyValue.slice(Math.max(keyValue.length - 5, 0));
+    keyValue = keyValue.slice(Math.max(keyValue.length - intEntries, 0));
     let message = '';
     for (let i = 0; i < keyValue.length; i++) {
         message += `**${keyValue[i][0]}** : ${keyValue[i][1]}\r\n`;
@@ -33,7 +35,7 @@ function getHistoryGame(interaction, gameName) {
 
     const titledGameName =
         gameName.charAt(0).toUpperCase() + gameName.substring(1, gameName.length);
-    return `Voici les 5 derniers scores ${titledGameName} enregistrés pour **${user}**\r\n${message}`;
+    return `Voici les ${intEntries} derniers scores ${titledGameName} enregistrés pour **${user}**\r\n${message}`;
 }
 
 module.exports = { getHistoryGame };

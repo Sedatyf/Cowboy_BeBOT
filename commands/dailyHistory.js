@@ -17,9 +17,16 @@ module.exports = {
         )
         .addStringOption(option2 =>
             option2.setName('user').setDescription("Le nom de l'utilisateur").setRequired(false)
+        )
+        .addStringOption(option3 =>
+            option3
+                .setName('entries')
+                .setDescription("Le nombre d'entrées que vous voulez afficher")
+                .setRequired(false)
         ),
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
-        await interaction.reply(getHistory.getHistoryGame(interaction, gameName));
+        const entries = interaction.options.getString('entries');
+        await interaction.reply(getHistory.getHistoryGame(interaction, gameName, entries));
     },
 };
