@@ -53,7 +53,10 @@ module.exports = {
 
             if (length < 10) continue;
 
-            resultEmbed.addField(utils.title(user), `${average} (${length} participations)`, false);
+            resultEmbed.addFields({
+                name: utils.title(user),
+                value: `${average} (${length} participations)`,
+            });
         }
 
         await interaction.reply({ embeds: [resultEmbed] });
