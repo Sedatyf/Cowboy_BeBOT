@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const getAverage = require('../tools/getAverageScore');
 const utils = require('../tools/utils');
 
@@ -23,7 +23,7 @@ module.exports = {
         const dict = {
             [gameName]: [],
         };
-        const resultEmbed = new MessageEmbed()
+        const resultEmbed = new EmbedBuilder()
             .setColor('#0099ff')
             .setTitle(`Scores ${utils.title(gameName.replace('Score', ''))}`)
             .setDescription('Moyenne de score');
