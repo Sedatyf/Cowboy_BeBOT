@@ -12,13 +12,14 @@ let keyValue = [];
  * @param {string} entries the number of entries you want to display (default 5)
  * @returns {string} returns a message with history or an error
  */
-function getHistoryGame(interaction, gameName, entries = '5') {
+function getHistoryGame(interaction, gameName, entries) {
     const user = jsonTools.verifyUserExistsJson(interaction);
     // Guard Clause
     if (!(user in dailyScoreJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
 
+    if (entries === null) entries = 5;
     const intEntries = parseInt(entries);
     const scoreName = gameName + 'Score';
     const scores = dailyScoreJson['users'][user][scoreName];
