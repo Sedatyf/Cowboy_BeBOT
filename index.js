@@ -1,6 +1,6 @@
 // Module import
-const fs = require('fs');
-const { Client, Collection, Intents, Guild } = require('discord.js');
+const fs = require('node:fs');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const schedule = require('node-schedule');
 
 const getFreeGame = require('./tools/getFreeGame.js');
@@ -14,7 +14,13 @@ const TOKEN = process.env.BOT_TOKEN;
 const FILENAME = 'data/dailyScore.json';
 
 // Variable initialisation
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
+});
 client.commands = new Collection();
 const onMessageFunctions = {};
 
