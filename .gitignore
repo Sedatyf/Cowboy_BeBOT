@@ -12,6 +12,9 @@ node_modules/
 .env.test
 .env.production
 
+# coverage/test directory and files
+coverage
+
 # Sandbox file so I can fiddle around
 sandbox.js
 
