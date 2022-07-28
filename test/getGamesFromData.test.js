@@ -10,9 +10,9 @@ const epicGames = epicJson.data.Catalog.searchStore.elements;
 function getGamesFromData(gamesData) {
     const todayDate = new Date(utils.generateTodayDate());
     let baseLink = 'https://store.epicgames.com/fr/p/';
+    const results = [];
 
     for (const element of gamesData) {
-        const results = [];
         if (element.price.totalPrice.discountPrice === 0 && element.promotions !== null) {
             try {
                 const epicStartDate =
@@ -38,9 +38,9 @@ function getGamesFromData(gamesData) {
             }
 
             results.push(link);
-            return results;
         }
     }
+    return results;
 }
 
 getEpicData.getEpicData(constants.epicGameLink);
