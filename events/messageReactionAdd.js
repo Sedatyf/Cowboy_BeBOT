@@ -2,10 +2,13 @@ const emojiList = [
     '375955064931745792', // lul
     '864226078951997480', // kekw
     '684156698532773937', // kekw2
+    '864431843663020062', // OMEGALUL
     '408634661791858690', // alain
     '363999789328891914', // sturdyMegaforce
+    '230273349677350912', // heyGuys
     '😂',
     '😭',
+    '🌃',
 ];
 
 module.exports = {
@@ -22,6 +25,8 @@ module.exports = {
                 return;
             }
         }
+
+        // console.log(reaction._emoji.id); // Debug for emoji ID
 
         if (emojiList.includes(reaction._emoji.id) || emojiList.includes(reaction._emoji.name)) {
             let indexOfEmoji = emojiList.indexOf(reaction._emoji.id);
