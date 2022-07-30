@@ -1,6 +1,6 @@
 // Module import
 const fs = require('node:fs');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const schedule = require('node-schedule');
 
 const getFreeGame = require('./tools/getFreeGame.js');
@@ -19,7 +19,9 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions,
     ],
+    partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 client.commands = new Collection();
 const onMessageFunctions = {};
