@@ -123,7 +123,7 @@ function saveLoldleScore(filepath, discordMessage) {
     const indexShots = messageElements.indexOf('shots');
     let score;
     indexShots === -1
-        ? (score = messageElements.indexOf('shot') - 1)
+        ? (score = messageElements[messageElements.indexOf('shot') - 1])
         : (score = messageElements[indexShots - 1]);
 
     jsonTools.dailyBuildJson(
