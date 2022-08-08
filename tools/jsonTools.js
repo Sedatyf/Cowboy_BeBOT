@@ -10,10 +10,11 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
  * @param {string} jsonPath json's filepath
  * @param {Message} message client's message
  * @param {string} gameScore the game score name as registered in dailyScore.json
+ * @param {string} loldleType the type of loldle. Is null by default
  * @param {Number} gameNumber the daily game's number
  * @param {Number} score user score
  */
-function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
+function dailyBuildJson(jsonPath, message, gameScore, loldleType = 'null', gameNumber, score) {
     const jsonData = require(`../${jsonPath}`);
     const currentUser = message.author.username.toLowerCase();
     if (!(currentUser in jsonData['users'])) {
@@ -34,7 +35,12 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score) {
         return;
     }
 
-    jsonData['users'][currentUser][gameScore][gameNumber] = score;
+    if (gameScore === 'loldleScore') {
+        jsonData['users'][currentUser]['loldleScore'][loldleType][gameNumber] = score;
+    } else {
+        jsonData['users'][currentUser][gameScore][gameNumber] = score;
+    }
+
     const json = JSON.stringify(jsonData);
     utils.writeFile(jsonPath, json);
 }

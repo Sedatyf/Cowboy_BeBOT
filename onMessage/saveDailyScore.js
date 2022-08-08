@@ -3,7 +3,6 @@ const jsonTools = require('../tools/jsonTools');
 function saveSutomScore(filepath, discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (!userMessage.includes('SUTOM #')) return; // Guard clause
-
     const messageElements = userMessage.split(' ');
 
     if (messageElements.length < 3) {
@@ -24,7 +23,6 @@ Score: ${score}`);
 function saveFramedScore(filepath, discordMessage) {
     const userMessage = discordMessage.cleanContent;
     if (!userMessage.includes('Framed #')) return; // Guard clause
-
     const messageElements = userMessage.split(' ');
 
     if (messageElements.length < 3) {
@@ -110,4 +108,44 @@ Posterdle number: ${currentPoster}
 Score: ${time}`);
 }
 
-module.exports = { saveSutomScore, saveFramedScore, saveMoviedleScore, savePosterdleScore };
+function saveLoldleScore(filepath, discordMessage) {
+    const userMessage = discordMessage.cleanContent;
+    if (!userMessage.includes('I found #LoLdle champion #')) return; // Guard clause
+
+    const removedMessage = userMessage.replace('I found #LoLdle champion #', '');
+    const messageElements = removedMessage.split(' ');
+
+    const gameNumber = messageElements[0];
+    let gameType = messageElements[3].replace("'s", '');
+    if (gameType === 'mode') gameType = 'classic';
+    if (gameType === 'partial') gameType = 'splash';
+
+    const indexShots = messageElements.indexOf('shots');
+    let indexScore;
+    indexShots === -1
+        ? (indexScore = messageElements.indexOf('shot') - 1)
+        : (indexScore = messageElements[indexShots - 1]);
+    const score = messageElements[indexScore];
+
+    jsonTools.dailyBuildJson(
+        filepath,
+        discordMessage,
+        'loldleScore',
+        gameType,
+        gameNumber,
+        parseInt(score)
+    );
+    console.log(`The following Loldle Score has been saved:
+User: ${discordMessage.author.username}
+Loldle number: ${gameNumber}
+Loldle type: ${gameType}
+Score: ${score}`);
+}
+
+module.exports = {
+    saveSutomScore,
+    saveFramedScore,
+    saveMoviedleScore,
+    savePosterdleScore,
+    saveLoldleScore,
+};
