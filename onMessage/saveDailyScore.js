@@ -130,9 +130,9 @@ function saveLoldleScore(filepath, discordMessage) {
         filepath,
         discordMessage,
         'loldleScore',
-        gameType,
         gameNumber,
-        parseInt(score)
+        parseInt(score),
+        gameType
     );
     console.log(`The following Loldle Score has been saved:
 User: ${discordMessage.author.username}

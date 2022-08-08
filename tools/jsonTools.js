@@ -14,7 +14,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
  * @param {Number} gameNumber the daily game's number
  * @param {Number} score user score
  */
-function dailyBuildJson(jsonPath, message, gameScore, loldleType = 'null', gameNumber, score) {
+function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleType = 'null') {
     const jsonData = require(`../${jsonPath}`);
     const currentUser = message.author.username.toLowerCase();
     if (!(currentUser in jsonData['users'])) {
@@ -30,6 +30,9 @@ function dailyBuildJson(jsonPath, message, gameScore, loldleType = 'null', gameN
         utils.writeFile(jsonPath, createUserJson);
     }
 
+    console.log(
+        `gamescore: ${gameScore} / loldleType: ${loldleType}, gameNumber: ${gameNumber} / score: ${score}`
+    );
     if (typeof score !== 'number' || score < 1) {
         message.reply("T'essayes de m'arnaquer ? è_é");
         return;
