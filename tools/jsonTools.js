@@ -30,9 +30,6 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleT
         utils.writeFile(jsonPath, createUserJson);
     }
 
-    console.log(
-        `gamescore: ${gameScore} / loldleType: ${loldleType}, gameNumber: ${gameNumber} / score: ${score}`
-    );
     if (typeof score !== 'number' || score < 1) {
         message.reply("T'essayes de m'arnaquer ? è_é");
         return;
