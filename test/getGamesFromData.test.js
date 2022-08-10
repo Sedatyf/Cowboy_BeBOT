@@ -1,9 +1,7 @@
 const utils = require('../tools/utils');
 const fs = require('fs');
-const getEpicData = require('../tools/getEpicData');
-const constants = require('../data/constant.json');
 
-const epicData = process.cwd() + '/data/epicOutput.json';
+const epicData = process.cwd() + '/test/testData/epicOutput.test.json';
 const epicJson = JSON.parse(fs.readFileSync(epicData, 'utf8'));
 const epicGames = epicJson.data.Catalog.searchStore.elements;
 
@@ -42,8 +40,6 @@ function getGamesFromData(gamesData) {
     }
     return results;
 }
-
-getEpicData.getEpicData(constants.epicGameLink);
 
 describe('Verify Get games From Data', () => {
     it('should not be null or undefined', () => {
