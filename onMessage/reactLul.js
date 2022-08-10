@@ -6,7 +6,7 @@ module.exports = {
         const userMessage = message.cleanContent.toLowerCase();
         const lul = client.emojis.cache.find(emoji => emoji.name === 'lul');
         if (userMessage.includes('mdr') || userMessage.includes('lol')) {
-            if (userMessage.includes('#LoLdle')) return; // reduce spam on Loldle game
+            if (userMessage.includes('#loldle')) return; // reduce spam on Loldle game
             const rand = utils.getRandomIntInclusive(2, 10) * 1000;
             await delay(rand);
             await message.react(lul);
