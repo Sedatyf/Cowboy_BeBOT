@@ -30,11 +30,6 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleT
         utils.writeFile(jsonPath, createUserJson);
     }
 
-    if (typeof score !== 'number' || score < 1) {
-        message.reply("T'essayes de m'arnaquer ? è_é");
-        return;
-    }
-
     if (gameScore === 'loldleScore') {
         jsonData['users'][currentUser]['loldleScore'][loldleType][gameNumber] = score;
     } else {
