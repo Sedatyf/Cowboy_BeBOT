@@ -59,9 +59,13 @@ function getAverageScoreFromMessage(interaction, gameName) {
  * @param {string} userName the username
  * @param {string} gameName game's name in choices
  */
-function getAverageScoreFromUsername(userName, gameName) {
+function getAverageScoreFromUsername(userName, gameName, loldleCategory = null) {
     const scoreName = gameName + 'Score';
-    const scores = dailyJson['users'][userName][scoreName];
+
+    let scores = dailyJson['users'][userName][scoreName];
+    if (gameName === 'loldle') {
+        scores = dailyJson['users'][userName][scoreName][loldleCategory];
+    }
 
     let sum = 0;
     for (const score in scores) {

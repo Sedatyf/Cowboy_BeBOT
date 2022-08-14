@@ -16,10 +16,29 @@ module.exports = {
                 .addChoice('Framed', 'framed')
                 .addChoice('Moviedle', 'moviedle')
                 .addChoice('Posterdle', 'posterdle')
+                .addChoice('Loldle', 'loldle')
+        )
+        .addStringOption(option2 =>
+            option2
+                .setName('loldle_category')
+                .setDescription('Le nom de la catégorie Loldle')
+                .addChoice("Ability's Icon", 'ability')
+                .addChoice('Classic mode', 'classic')
+                .addChoice('Partial splash', 'splash')
+                .addChoice('Quote', 'quote')
+                .setRequired(false)
         ),
     async execute(interaction) {
         const scoresJson = require('../data/dailyScore.json');
         const gameName = interaction.options.getString('game_name') + 'Score';
+
+        if (gameName === 'loldleScore' && !interaction.options.getString('loldle_category')) {
+            await interaction.reply(
+                'Si tu veux la moyenne pour Loldle, tu dois en plus préciser la catégorie de jeu (ability, partial, etc.)'
+            );
+            return;
+        }
+
         const dict = {
             [gameName]: [],
         };
@@ -32,10 +51,19 @@ module.exports = {
             for (const [eventName, scores] of Object.entries(events)) {
                 if (eventName === 'userInfo' || eventName !== gameName) continue;
                 if (Object.keys(scores).length === 0) continue;
-                const average = getAverage.getAverageScoreFromUsername(
-                    user,
-                    eventName.replace('Score', '')
-                );
+                let average;
+                if (gameName === 'loldleScore') {
+                    average = getAverage.getAverageScoreFromUsername(
+                        user,
+                        eventName.replace('Score', ''),
+                        interaction.options.getString('loldle_category')
+                    );
+                } else {
+                    average = getAverage.getAverageScoreFromUsername(
+                        user,
+                        eventName.replace('Score', '')
+                    );
+                }
                 dict[eventName].push([user, average]);
             }
         }
