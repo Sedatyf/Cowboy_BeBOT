@@ -14,9 +14,20 @@ module.exports = {
                 .addChoice('Framed', 'framed')
                 .addChoice('Moviedle', 'moviedle')
                 .addChoice('Posterdle', 'posterdle')
+                .addChoice('Loldle', 'loldle')
         )
         .addStringOption(option2 =>
             option2.setName('user').setDescription("Le nom de l'utilisateur").setRequired(false)
+        )
+        .addStringOption(option3 =>
+            option3
+                .setName('loldle_category')
+                .setDescription('Le nom de la catégorie Loldle')
+                .addChoice("Ability's Icon", 'ability')
+                .addChoice('Classic mode', 'classic')
+                .addChoice('Partial splash', 'splash')
+                .addChoice('Quote', 'quote')
+                .setRequired(false)
         ),
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');

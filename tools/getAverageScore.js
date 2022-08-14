@@ -16,9 +16,19 @@ function getAverageScoreFromMessage(interaction, gameName) {
     if (!(user in dailyJson.users)) {
         return `Je n'ai pas trouvé la personne ${interaction.options.getString('user')}`;
     }
+    if (gameName === 'loldle') {
+        const loldleCategory = interaction.options.getString('loldle_category');
+        if (!loldleCategory) {
+            return 'Si tu veux la moyenne pour Loldle, tu dois en plus préciser la catégorie de jeu (ability, partial, etc.)';
+        }
+    }
 
     const scoreName = gameName + 'Score';
-    const scores = dailyJson['users'][user][scoreName];
+    let scores = dailyJson['users'][user][scoreName];
+    if (gameName === 'loldle') {
+        const loldleCategory = interaction.options.getString('loldle_category');
+        scores = dailyJson['users'][user][scoreName][loldleCategory];
+    }
 
     let sum = 0;
     for (const score in scores) {
@@ -29,6 +39,15 @@ function getAverageScoreFromMessage(interaction, gameName) {
     average = Math.round((average + Number.EPSILON) * 100) / 100;
     const titledGameName =
         gameName.charAt(0).toUpperCase() + gameName.substring(1, gameName.length);
+
+    if (gameName === 'loldle') {
+        return `La moyenne à ${titledGameName} dans la catégorie ${interaction.options.getString(
+            'loldle_category'
+        )} pour **${user}**, avec **${
+            Object.keys(scores).length
+        }** participations, est de **${average}**`;
+    }
+
     return `La moyenne à ${titledGameName} pour **${user}**, avec **${
         Object.keys(scores).length
     }** participations, est de **${average}**`;
