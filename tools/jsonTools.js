@@ -6,7 +6,7 @@ const utils = require('./utils');
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
- * Save a sutom score for a specific user
+ * Save a daily game score for a specific user
  * @param {string} jsonPath json's filepath
  * @param {Message} message client's message
  * @param {string} gameScore the game score name as registered in dailyScore.json
@@ -36,6 +36,14 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleT
         jsonData['users'][currentUser][gameScore][gameNumber] = score;
     }
 
+    const json = JSON.stringify(jsonData);
+    utils.writeFile(jsonPath, json);
+}
+
+function apiBuildJson(jsonPath, currentUser, gameName, gameNumber, score) {
+    const jsonData = require(`../${jsonPath}`);
+    gameName = gameName.toLowerCase() + 'Score';
+    jsonData['users'][currentUser][gameName][gameNumber] = parseInt(score);
     const json = JSON.stringify(jsonData);
     utils.writeFile(jsonPath, json);
 }
@@ -119,4 +127,4 @@ function verifyUserExistsJson(interaction) {
     return user;
 }
 
-module.exports = { dailyBuildJson, ragdollBuildJson, verifyUserExistsJson };
+module.exports = { dailyBuildJson, apiBuildJson, ragdollBuildJson, verifyUserExistsJson };
