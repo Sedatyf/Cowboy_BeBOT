@@ -127,4 +127,15 @@ function verifyUserExistsJson(interaction) {
     return user;
 }
 
-module.exports = { dailyBuildJson, apiBuildJson, ragdollBuildJson, verifyUserExistsJson };
+function getScoreFromUserSpecificDay(jsonPath, gameName, user, gameNumber) {
+    const jsonData = require(`../${jsonPath}`);
+    return jsonData['users'][user][gameName + 'Score'][gameNumber];
+}
+
+module.exports = {
+    dailyBuildJson,
+    apiBuildJson,
+    ragdollBuildJson,
+    verifyUserExistsJson,
+    getScoreFromUserSpecificDay,
+};
