@@ -4,8 +4,7 @@
     "description": "La version JS de CowboyBeBOT",
     "main": "index.js",
     "scripts": {
-        "test:local": "jest --coverage --coverageDirectory=coverage",
-        "test:ci": "jest --testResultsProcessor ./node_modules/jest-junit --coverage --coverageDirectory=coverage"
+        "test": "jest"
     },
     "author": "Sedatyf",
     "license": "ISC",
