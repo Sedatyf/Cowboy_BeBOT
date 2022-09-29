@@ -48,6 +48,14 @@ function apiBuildJson(jsonPath, currentUser, gameName, gameNumber, score) {
     utils.writeFile(jsonPath, json);
 }
 
+function apiChangeCurrent(jsonPath, gameName, currentToSet) {
+    const jsonData = require(`../${jsonPath}`);
+    gameName = 'current' + utils.title(gameName);
+    jsonData['currentNumber'][gameName] = parseInt(currentToSet);
+    const json = JSON.stringify(jsonData);
+    utils.writeFile(jsonPath, json);
+}
+
 /**
  * Save a time/distance score for a specific user
  * @param {string} jsonPath json's filepath
@@ -127,6 +135,14 @@ function verifyUserExistsJson(interaction) {
     return user;
 }
 
+/**
+ * Allow to get score from a user on a specific game and specific day
+ * @param {string} jsonPath the path to the dailyScore json
+ * @param {string} gameName the game name (ie Sutom)
+ * @param {string} user the user name as stored in the dailyScore.json
+ * @param {string} gameNumber the number corresponding to the game day
+ * @returns a number which is score from user on specific day and game
+ */
 function getScoreFromUserSpecificDay(jsonPath, gameName, user, gameNumber) {
     const jsonData = require(`../${jsonPath}`);
     return jsonData['users'][user][gameName + 'Score'][gameNumber];
@@ -135,6 +151,7 @@ function getScoreFromUserSpecificDay(jsonPath, gameName, user, gameNumber) {
 module.exports = {
     dailyBuildJson,
     apiBuildJson,
+    apiChangeCurrent,
     ragdollBuildJson,
     verifyUserExistsJson,
     getScoreFromUserSpecificDay,
