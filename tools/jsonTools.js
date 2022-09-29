@@ -148,6 +148,11 @@ function getScoreFromUserSpecificDay(jsonPath, gameName, user, gameNumber) {
     return jsonData['users'][user][gameName + 'Score'][gameNumber];
 }
 
+function getScoreFromUser(jsonPath, gameName, user) {
+    const jsonData = require(`../${jsonPath}`);
+    return jsonData['users'][user][gameName + 'Score'];
+}
+
 module.exports = {
     dailyBuildJson,
     apiBuildJson,
@@ -155,4 +160,5 @@ module.exports = {
     ragdollBuildJson,
     verifyUserExistsJson,
     getScoreFromUserSpecificDay,
+    getScoreFromUser,
 };

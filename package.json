@@ -1,6 +1,6 @@
 {
     "name": "cowboybebot_js",
-    "version": "1.10.4",
+    "version": "1.11.5",
     "description": "La version JS de CowboyBeBOT",
     "main": "index.js",
     "scripts": {

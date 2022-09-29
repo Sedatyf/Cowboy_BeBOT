@@ -33,7 +33,7 @@ module.exports = {
             option4
                 .setName('game_number')
                 .setDescription('Le numéro du jeu (ex: 202 pour le Sutom #202')
-                .setRequired(true)
+                .setRequired(false)
         ),
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
@@ -41,25 +41,60 @@ module.exports = {
         const user2 = interaction.options.getString('user2');
         const gameNumber = interaction.options.getString('game_number');
 
-        const user1Score = jsonTools.getScoreFromUserSpecificDay(
-            FILENAME,
-            gameName,
-            user1,
-            gameNumber
-        );
-        const user2Score = jsonTools.getScoreFromUserSpecificDay(
-            FILENAME,
-            gameName,
-            user2,
-            gameNumber
-        );
+        if (gameNumber === null || gameNumber === undefined) {
+            const user1Values = jsonTools.getScoreFromUser(FILENAME, gameName, user1);
+            const user2Values = jsonTools.getScoreFromUser(FILENAME, gameName, user2);
+            const user1Scores = [];
+            const user2Scores = [];
 
-        await interaction.reply(
-            `**${
-                user1Score < user2Score ? utils.title(user1) : utils.title(user2)
-            }** a gagné le **${gameName}** numéro **${gameNumber}**\r\n**${utils.title(
-                user1
-            )}** a trouvé en ${user1Score}\r\n**${utils.title(user2)}** a trouvé en ${user2Score}`
-        );
+            Object.values(user1Values).forEach(element => {
+                user1Scores.push(element);
+            });
+            Object.values(user2Values).forEach(element => {
+                user2Scores.push(element);
+            });
+
+            const listLength =
+                user1Scores.length > user2Scores.length ? user1Scores.length : user2Scores.length;
+            let user1Score = 0;
+            let user2Score = 0;
+
+            for (let i = 0; i < listLength; i++) {
+                user1Scores[i] > user2Scores[i] ? user1Score++ : user2Score++;
+            }
+
+            await interaction.reply(
+                `La personne qui gagne ce duel de ${utils.title(gameName)} est **${
+                    user1Score > user2Score ? utils.title(user1) : utils.title(user2)
+                }**
+**${utils.title(user1)}** a fait un meilleur score que ${utils.title(user2)} **${user1Score}** fois.
+**${utils.title(user2)}** a fait un meilleur score que ${utils.title(
+                    user1
+                )} **${user2Score}** fois.`
+            );
+        } else {
+            const user1Score = jsonTools.getScoreFromUserSpecificDay(
+                FILENAME,
+                gameName,
+                user1,
+                gameNumber
+            );
+            const user2Score = jsonTools.getScoreFromUserSpecificDay(
+                FILENAME,
+                gameName,
+                user2,
+                gameNumber
+            );
+
+            await interaction.reply(
+                `**${
+                    user1Score < user2Score ? utils.title(user1) : utils.title(user2)
+                }** a gagné le **${gameName}** numéro **${gameNumber}**\r\n**${utils.title(
+                    user1
+                )}** a trouvé en ${user1Score}\r\n**${utils.title(
+                    user2
+                )}** a trouvé en ${user2Score}`
+            );
+        }
     },
 };
