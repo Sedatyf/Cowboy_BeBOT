@@ -72,7 +72,7 @@ module.exports = {
                     ` est **${user1Score > user2Score ? utils.title(user1) : utils.title(user2)}**
 **${utils.title(user1)}** a fait un meilleur score que ${utils.title(user2)} **${user1Score}** fois.
 **${utils.title(user2)}** a fait un meilleur score que ${utils.title(user1)} **${user2Score}** fois.
-Il y a eu ${draw} égalités`
+Il y a eu **${draw} égalités**`
             );
         } else {
             const user1Score = jsonTools.getScoreFromUserSpecificDay(
