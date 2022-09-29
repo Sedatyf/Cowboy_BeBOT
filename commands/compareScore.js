@@ -58,19 +58,21 @@ module.exports = {
                 user1Scores.length > user2Scores.length ? user1Scores.length : user2Scores.length;
             let user1Score = 0;
             let user2Score = 0;
+            let draw = 0;
 
             for (let i = 0; i < listLength; i++) {
-                user1Scores[i] > user2Scores[i] ? user1Score++ : user2Score++;
+                if (user1Scores[i] === user2Scores[i]) draw++;
+                else if (user1Scores[i] < user2Scores[i]) user1Score++;
+                else if (user2Scores[i] < user1Scores[i]) user2Score++;
             }
 
             await interaction.reply(
-                `La personne qui gagne ce duel de ${utils.title(gameName)} est **${
-                    user1Score > user2Score ? utils.title(user1) : utils.title(user2)
-                }**
+                `La personne qui gagne ce duel de ` +
+                    `${utils.title(gameName)}` +
+                    ` est **${user1Score > user2Score ? utils.title(user1) : utils.title(user2)}**
 **${utils.title(user1)}** a fait un meilleur score que ${utils.title(user2)} **${user1Score}** fois.
-**${utils.title(user2)}** a fait un meilleur score que ${utils.title(
-                    user1
-                )} **${user2Score}** fois.`
+**${utils.title(user2)}** a fait un meilleur score que ${utils.title(user1)} **${user2Score}** fois.
+Il y a eu ${draw} égalités`
             );
         } else {
             const user1Score = jsonTools.getScoreFromUserSpecificDay(
