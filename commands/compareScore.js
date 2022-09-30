@@ -44,26 +44,21 @@ module.exports = {
         if (gameNumber === null || gameNumber === undefined) {
             const user1Values = jsonTools.getScoreFromUser(FILENAME, gameName, user1);
             const user2Values = jsonTools.getScoreFromUser(FILENAME, gameName, user2);
-            const user1Scores = [];
-            const user2Scores = [];
 
-            Object.values(user1Values).forEach(element => {
-                user1Scores.push(element);
-            });
-            Object.values(user2Values).forEach(element => {
-                user2Scores.push(element);
-            });
-
-            const listLength =
-                user1Scores.length > user2Scores.length ? user1Scores.length : user2Scores.length;
             let user1Score = 0;
             let user2Score = 0;
             let draw = 0;
 
-            for (let i = 0; i < listLength; i++) {
-                if (user1Scores[i] === user2Scores[i]) draw++;
-                else if (user1Scores[i] < user2Scores[i]) user1Score++;
-                else if (user2Scores[i] < user1Scores[i]) user2Score++;
+            for (const [keyUser1, valueUser1] of Object.entries(user1Values)) {
+                for (const [keyUser2, valueUser2] of Object.entries(user2Values)) {
+                    if (keyUser1 === keyUser2) {
+                        if (valueUser1 === valueUser2) {
+                            draw++;
+                            continue;
+                        }
+                        valueUser1 < valueUser2 ? user1Score++ : user2Score++;
+                    }
+                }
             }
 
             await interaction.reply(
