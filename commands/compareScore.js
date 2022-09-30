@@ -50,14 +50,13 @@ module.exports = {
             let draw = 0;
 
             for (const [keyUser1, valueUser1] of Object.entries(user1Values)) {
-                for (const [keyUser2, valueUser2] of Object.entries(user2Values)) {
-                    if (keyUser1 === keyUser2) {
-                        if (valueUser1 === valueUser2) {
-                            draw++;
-                            continue;
-                        }
-                        valueUser1 < valueUser2 ? user1Score++ : user2Score++;
+                if (keyUser1 in user2Values) {
+                    const valueUser2 = user2Values[keyUser1];
+                    if (valueUser1 === valueUser2) {
+                        draw++;
+                        continue;
                     }
+                    valueUser1 < valueUser2 ? user1Score++ : user2Score++;
                 }
             }
 
