@@ -37,8 +37,8 @@ module.exports = {
         ),
     async execute(interaction) {
         const gameName = interaction.options.getString('game_name');
-        const user1 = interaction.options.getString('user1');
-        const user2 = interaction.options.getString('user2');
+        const user1 = interaction.options.getString('user1').toLowerCase();
+        const user2 = interaction.options.getString('user2').toLowerCase();
         const gameNumber = interaction.options.getString('game_number');
 
         if (gameNumber === null || gameNumber === undefined) {
