@@ -48,7 +48,7 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleT
  * @param {string} gameNumber the number (iteration) of the game you want to add score
  * @param {string} score the score value
  */
-function apiBuildJson(jsonPath, currentUser, gameName, gameNumber, score) {
+function apiAddDailyScore(jsonPath, currentUser, gameName, gameNumber, score) {
     const jsonData = require(`../${jsonPath}`);
     gameName = gameName.toLowerCase() + 'Score';
     jsonData['users'][currentUser][gameName][gameNumber] = parseInt(score);
@@ -176,7 +176,7 @@ function getScoreFromUser(jsonPath, gameName, user) {
 
 module.exports = {
     dailyBuildJson,
-    apiBuildJson,
+    apiAddDailyScore,
     apiChangeCurrent,
     ragdollBuildJson,
     verifyUserExistsJson,

@@ -35,7 +35,7 @@ module.exports = {
             const gameNumber = interaction.options.getString('game_number');
             const gameScore = interaction.options.getString('game_score');
 
-            jsonTools.apiBuildJson(FILENAME, user, gameName, gameNumber, gameScore);
+            jsonTools.apiAddDailyScore(FILENAME, user, gameName, gameNumber, gameScore);
             await interaction.reply({ content: 'New score added', ephemeral: true });
         } else {
             await interaction.reply({
