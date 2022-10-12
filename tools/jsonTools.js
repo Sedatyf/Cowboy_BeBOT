@@ -40,6 +40,14 @@ function dailyBuildJson(jsonPath, message, gameScore, gameNumber, score, loldleT
     utils.writeFile(jsonPath, json);
 }
 
+/**
+ * Add a score into dailyScore.json without any discord interaction required
+ * @param {string} jsonPath path of the dailyScore.json file
+ * @param {string} currentUser the user you want to add score
+ * @param {string} gameName the name of the game you want to add score
+ * @param {string} gameNumber the number (iteration) of the game you want to add score
+ * @param {string} score the score value
+ */
 function apiBuildJson(jsonPath, currentUser, gameName, gameNumber, score) {
     const jsonData = require(`../${jsonPath}`);
     gameName = gameName.toLowerCase() + 'Score';
@@ -48,6 +56,12 @@ function apiBuildJson(jsonPath, currentUser, gameName, gameNumber, score) {
     utils.writeFile(jsonPath, json);
 }
 
+/**
+ * Change the current value tracker for Sutom and Framed
+ * @param {string} jsonPath path of the dailyScore.json file
+ * @param {string} gameName the name of the game you want to update the tracker
+ * @param {string} currentToSet the value of the tracker
+ */
 function apiChangeCurrent(jsonPath, gameName, currentToSet) {
     const jsonData = require(`../${jsonPath}`);
     gameName = 'current' + utils.title(gameName);
@@ -148,6 +162,13 @@ function getScoreFromUserSpecificDay(jsonPath, gameName, user, gameNumber) {
     return jsonData['users'][user][gameName + 'Score'][gameNumber];
 }
 
+/**
+ * Get score from a specific user
+ * @param {string} jsonPath path of the dailyScore.json file
+ * @param {string} gameName the name of the game you want to get score
+ * @param {string} user the name of the user you want to get score
+ * @returns {string} the score value registered in dailyScore.json
+ */
 function getScoreFromUser(jsonPath, gameName, user) {
     const jsonData = require(`../${jsonPath}`);
     return jsonData['users'][user][gameName + 'Score'];
