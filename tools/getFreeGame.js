@@ -69,6 +69,8 @@ function getGamesFromData(client, gamesData) {
                 link = `${baseLink}${element.catalogNs.mappings[0].pageSlug}`;
             }
 
+            if (link.includes('/home')) link = link.replace('/home', '');
+
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
             client.channels.cache.get(channelIDs.informations).send(link);
         }
