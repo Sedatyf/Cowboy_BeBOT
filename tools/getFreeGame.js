@@ -63,13 +63,9 @@ function getGamesFromData(client, gamesData) {
             if (element.offerType === 'BUNDLE') {
                 baseLink = 'https://store.epicgames.com/fr/bundles/';
                 link = `${baseLink}${element['customAttributes'][3]['value']}`;
-            } else if (element.productSlug !== null) {
-                link = `${baseLink}${element.productSlug}`;
-            } else {
+            } else if (element.catalogNs.mappings[0].pageType === 'productHome') {
                 link = `${baseLink}${element.catalogNs.mappings[0].pageSlug}`;
             }
-
-            if (link.includes('/home')) link = link.replace('/home', '');
 
             client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
             client.channels.cache.get(channelIDs.informations).send(link);
