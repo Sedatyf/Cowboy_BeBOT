@@ -63,7 +63,7 @@ client.on('messageCreate', async message => {
 // cron job for free game on Epic
 // eslint-disable-next-line no-unused-vars
 const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
-    getEpicData.getEpicData(constants.epicGameLink);
+    getEpicData.getEpicData();
     setTimeout(() => {
         getFreeGame.getFreeGame(client, epicOutputFullpath);
     }, 5000);
