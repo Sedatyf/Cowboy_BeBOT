@@ -19,7 +19,7 @@ function getEpicData() {
     axios(config)
         .then(function (response) {
             const bodyString = JSON.stringify(response.data);
-            utils.writeFile(process.cwd() + '/data/epicOutput.json', bodyString);
+            utils.writeFile(process.cwd() + '/data/generated/epicOutput.json', bodyString);
         })
         .catch(function (error) {
             return console.log(error);
