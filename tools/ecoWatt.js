@@ -105,4 +105,13 @@ async function ecowattProcess(client) {
     sendMessage(client);
 }
 
+async function devDebug() {
+    await getToken();
+    await getSignals();
+}
+
+if (require.main === module) {
+    devDebug();
+}
+
 module.exports = { ecowattProcess };
