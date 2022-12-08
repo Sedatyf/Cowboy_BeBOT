@@ -32,6 +32,8 @@
         "C'est claqué au sol"
     ],
     "epicGameLink": "https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=FR&allowCountries=FR",
+    "ecowattTokenLink": "https://digital.iservices.rte-france.com/token/oauth/?Authorization",
+    "ecowattSignalsLink": "https://digital.iservices.rte-france.com/open_api/ecowatt/v4/signals",
     "freeGameMessage": "Cette semaine les jeux gratuits sont les suivants :",
     "freeGameReminder": "C'est le dernier jour pour prendre les jeux gratuits sur Epic !\nVous avez jusque demain 16h00 avant la prochaine rotation\nPour rappel, les jeux gratuits sont les suivants :"
 }
