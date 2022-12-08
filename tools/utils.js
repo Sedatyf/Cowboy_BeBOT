@@ -1,5 +1,22 @@
 const fs = require('fs');
 
+const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+const months = [
+    'Janvier',
+    'Février',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+];
+
 /**
  * @param  {Array} arr
  * @returns {Number} A random number based on the Array's length
@@ -35,6 +52,35 @@ function generateTodayDate() {
 }
 
 /**
+ * Get the date for the actual day (DAY MONTH yyyy)
+ * @returns {string} Returns a string with today date
+ */
+function generateFullTodayDate() {
+    const date = new Date();
+    const dayName = days[date.getDay()];
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${dayName} ${day} ${month} ${year}`;
+}
+
+/**
+ * Get today date and add X days to it and return a date in the format DAY MONTH yyyy
+ * @param {Number} daysToAdd the number of days to add
+ * @returns {string} Returns d+X where X is the number of days in a full date format
+ */
+function addDaysFullTodayDate(daysToAdd) {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + daysToAdd);
+
+    const dayName = days[targetDate.getDay()];
+    const day = ('0' + targetDate.getDate()).slice(-2);
+    const month = months[targetDate.getMonth()];
+    const year = targetDate.getFullYear();
+    return `${dayName} ${day} ${month} ${year}`;
+}
+
+/**
  * Get today date and add 1 day to it
  * @returns {string} Returns d+1 with yyyy-mm-dd format
  */
@@ -55,7 +101,7 @@ function add1DayToTodayDate() {
  * @param {string} data
  */
 function writeFile(filepath, data) {
-    fs.writeFile(filepath, data, 'utf-8', err => {
+    fs.writeFileSync(filepath, data, 'utf-8', err => {
         if (err) throw err;
     });
 }
@@ -94,7 +140,9 @@ module.exports = {
     generateRandomForArray,
     getRandomIntInclusive,
     generateTodayDate,
+    generateFullTodayDate,
     add1DayToTodayDate,
+    addDaysFullTodayDate,
     writeFile,
     readFile,
     getCurrentSutom,
