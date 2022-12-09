@@ -3,8 +3,7 @@ const fs = require('node:fs');
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const schedule = require('node-schedule');
 
-const getFreeGame = require('./tools/getFreeGame.js');
-const getEpicData = require('./tools/getEpicData.js');
+const epicGetGames = require('./tools/epicGetGames.js');
 const ecowatt = require('./tools/ecoWatt.js');
 const utils = require('./tools/utils');
 const constants = require('./data/constant.json');
@@ -64,18 +63,12 @@ client.on('messageCreate', async message => {
 // cron job for free game on Epic
 // eslint-disable-next-line no-unused-vars
 const jobEpic = schedule.scheduleJob('10 17 * * 4', function () {
-    getEpicData.getEpicData();
-    setTimeout(() => {
-        getFreeGame.getFreeGame(client, epicOutputFullpath);
-    }, 5000);
+    epicGetGames.getFreeGameProcess(client, epicOutputFullpath);
 });
 
 // eslint-disable-next-line no-unused-vars
 const jobReminder = schedule.scheduleJob('00 18 * * 3', function () {
-    getEpicData.getEpicData(constants.epicGameLink);
-    setTimeout(() => {
-        getFreeGame.reminderFreeGame(client, epicOutputFullpath);
-    }, 5000);
+    epicGetGames.reminderFreeGameProcess(client, epicOutputFullpath);
 });
 
 // eslint-disable-next-line no-unused-vars

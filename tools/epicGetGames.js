@@ -1,8 +1,34 @@
 const fs = require('fs');
+const axios = require('axios');
+
 const constants = require('../data/constant.json');
 const channelIDs = require('../data/discordIDs.json').channels;
 const roleIDs = require('../data/discordIDs.json').roles;
 const utils = require('../tools/utils.js');
+
+const data = '';
+
+/**
+ * Download the response's body from the given URL and then write it in a JSON
+ * @param {string} url This URL must lead to the JSON request from EpicGame Store
+ */
+async function getEpicData() {
+    const config = {
+        method: 'get',
+        url: constants.epicGameLink,
+        headers: {},
+        data: data,
+    };
+
+    await axios(config)
+        .then(function (response) {
+            const bodyString = JSON.stringify(response.data);
+            utils.writeFile(process.cwd() + '/data/generated/epicOutput.json', bodyString);
+        })
+        .catch(function (error) {
+            return console.log(error);
+        });
+}
 
 /**
  * Get the current free games, send those games to a channel, ping people with a role
@@ -73,4 +99,18 @@ function getGamesFromData(client, gamesData) {
     }
 }
 
-module.exports = { getFreeGame, reminderFreeGame };
+async function getFreeGameProcess(client, epicOutputFullpath) {
+    await getEpicData();
+    getFreeGame(client, epicOutputFullpath);
+}
+
+async function reminderFreeGameProcess(client, epicOutputFullpath) {
+    await getEpicData();
+    reminderFreeGame(client, epicOutputFullpath);
+}
+
+if (require.main === module) {
+    getEpicData();
+}
+
+module.exports = { getFreeGameProcess, reminderFreeGameProcess };
