@@ -10,7 +10,6 @@ const roleIDs = require('../data/discordIDs.json').roles;
 
 require('dotenv').config();
 const CLIENT_ID = process.env.ECOWATT_CLIENT_ID;
-const resultEmbed = new EmbedBuilder().setColor('#0099ff').setTitle(`La météo de l'électricité ⚡`);
 const ecowattTokenPath = '/data/generated/ecoWattToken.json';
 const ecowattSignalsPath = '/data/generated/ecoWattSignals.json';
 
@@ -64,6 +63,10 @@ async function getSignals() {
 function parseSignals() {
     const signalsJson = fs.readFileSync(process.cwd() + ecowattSignalsPath);
     const signalsData = JSON.parse(signalsJson);
+    const resultEmbed = new EmbedBuilder()
+        .setColor('#0099ff')
+        .setTitle(`La météo de l'électricité ⚡`);
+
     for (let i = 0; i < 4; i++) {
         switch (signalsData['signals'][i]['dvalue']) {
             case 1:
