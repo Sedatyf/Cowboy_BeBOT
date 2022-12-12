@@ -94,12 +94,14 @@ function parseSignals() {
         name: '\u200b',
         value: "Pour plus d'informations sur les zones et les horaires des coupures, veuillez vous référer au site Ecowatt : https://www.monecowatt.fr/",
     });
+
+    return resultEmbed;
 }
 
 function sendMessage(client) {
-    parseSignals();
-    client.channels.cache.get(channelIDs.ecowatt).send(`Bonjour à tous <@&${roleIDs.ecowatt}>`);
-    client.channels.cache.get(channelIDs.ecowatt).send({ embeds: [resultEmbed] });
+    const embedToSend = parseSignals();
+    client.channels.cache.get(channelIDs.testing).send(`Bonjour à tous <@&$>`);
+    client.channels.cache.get(channelIDs.ecowatt).send({ embeds: [embedToSend] });
 }
 
 async function ecowattProcess(client) {
