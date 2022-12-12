@@ -1,7 +1,7 @@
 const axios = require('axios');
 const qs = require('qs');
 const fs = require('fs');
-const { EmbedBuilder } = require('discord.js');
+const { Client, EmbedBuilder } = require('discord.js');
 
 const utils = require('./utils');
 const constant = require('../data/constant.json');
@@ -60,6 +60,11 @@ async function getSignals() {
         });
 }
 
+/**
+ * Load the ecoWattSignals.json file in the data/generated/ folder and parse its information
+ * Generate an embedObject in order to be sent in a discord message
+ * @returns { EmbedBuilder } An Embed object containing ecowatt information
+ */
 function parseSignals() {
     const signalsJson = fs.readFileSync(process.cwd() + ecowattSignalsPath);
     const signalsData = JSON.parse(signalsJson);
@@ -98,18 +103,31 @@ function parseSignals() {
     return resultEmbed;
 }
 
+/**
+ * Simply send ecowatt information in the channelID.ecowatt with a ping message and embed with information
+ * @param {Client} client The bot's discord client in order to send messages
+ */
 function sendMessage(client) {
     const embedToSend = parseSignals();
-    client.channels.cache.get(channelIDs.testing).send(`Bonjour à tous <@&$>`);
+    client.channels.cache.get(channelIDs.ecowatt).send(`Bonjour à tous <@&${roleIDs.ecowatt}>`);
     client.channels.cache.get(channelIDs.ecowatt).send({ embeds: [embedToSend] });
 }
 
+/**
+ * Method that use async/await function to let time to request to be done
+ * The purpose of this method is only to be exported in the index.js
+ * @param {Client} client The bot's discord client in order to send messages
+ */
 async function ecowattProcess(client) {
     await getToken();
     await getSignals();
     sendMessage(client);
 }
 
+/**
+ * Same as function ecowattProcess() but without messages
+ * Allow to see process (if files are generated, error messages, ect) locally without disturbing users
+ */
 async function devDebug() {
     await getToken();
     await getSignals();
