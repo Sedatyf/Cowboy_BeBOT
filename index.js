@@ -7,7 +7,7 @@ const epicGetGames = require('./tools/epicGetGames.js');
 const ecowatt = require('./tools/ecoWatt.js');
 const utils = require('./tools/utils');
 const constants = require('./data/constant.json');
-const epicOutputFullpath = process.cwd() + '/data/epicOutput.json';
+const epicOutputFullpath = process.cwd() + '/data/generated/epicOutput.json';
 
 require('dotenv').config();
 const TOKEN = process.env.BOT_TOKEN;
