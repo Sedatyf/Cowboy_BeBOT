@@ -4,9 +4,7 @@ const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js'
 const schedule = require('node-schedule');
 
 const epicGetGames = require('./tools/epicGetGames.js');
-const ecowatt = require('./tools/ecoWatt.js');
 const utils = require('./tools/utils');
-const constants = require('./data/constant.json');
 const epicOutputFullpath = process.cwd() + '/data/generated/epicOutput.json';
 
 require('dotenv').config();
@@ -82,11 +80,6 @@ const jobCurrentGame = schedule.scheduleJob('1 0 * * *', function () {
 
     const json = JSON.stringify(jsonData);
     utils.writeFile('./data/dailyScore.json', json);
-});
-
-// eslint-disable-next-line no-unused-vars
-const jobEcowatt = schedule.scheduleJob('30 17 * * *', function () {
-    ecowatt.ecowattProcess(client);
 });
 
 client.login(TOKEN);
