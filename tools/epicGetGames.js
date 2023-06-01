@@ -56,6 +56,10 @@ function getFreeGame(client, epicOutputFullpath) {
 function reminderFreeGame(client, epicOutputFullpath) {
     const epicJson = JSON.parse(fs.readFileSync(epicOutputFullpath, 'utf8'));
     const epicGames = epicJson.data.Catalog.searchStore.elements;
+    client.channels.cache
+        .get(channelIDs.informations)
+        .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
+    client.channels.cache.get(channelIDs.informations).send(constants.freeGameReminder);
     getGamesFromData(client, epicGames);
 }
 
@@ -101,10 +105,6 @@ function getGamesFromData(client, gamesData) {
             throw new Error('Generated link for free game is not an URL');
         }
 
-        client.channels.cache
-            .get(channelIDs.informations)
-            .send(`Bonjour à tous <@&${roleIDs.jeuxEpic}> :rat:`);
-        client.channels.cache.get(channelIDs.informations).send(constants.freeGameReminder);
         client.channels.cache.get(channelIDs.informations).send(`**${element.title}**`);
         client.channels.cache.get(channelIDs.informations).send(link);
     }
