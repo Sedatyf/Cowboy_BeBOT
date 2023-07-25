@@ -68,14 +68,21 @@ function reminderFreeGame(client, epicOutputFullpath) {
  * @param {string} gamesData The JSON from Epic
  */
 function getGamesFromData(client, gamesData) {
+    const freeGames = [];
     const todayDate = new Date(utils.generateTodayDate());
     let baseLink = 'https://store.epicgames.com/fr/p/';
 
     for (const element of gamesData) {
-        if (element.price.totalPrice.discountPrice !== 0 && element.promotions === null) {
-            throw new Error("Couldn't find any discounted game");
+        if (element.price.totalPrice.discountPrice === 0 && element.promotions !== null) {
+            freeGames.push(element);
         }
+    }
 
+    if (freeGames.length === 0) {
+        throw new Error("Couldn't find any discounted game");
+    }
+
+    for (const element of freeGames) {
         try {
             const epicStartDate =
                 element.promotions.promotionalOffers[0].promotionalOffers[0].startDate;
